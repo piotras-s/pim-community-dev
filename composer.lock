@@ -3,7 +3,7 @@
         "This file locks the dependencies of your project to a known state",
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file"
     ],
-    "hash": "b259285117d952bfd3324be8a7eb181a",
+    "hash": "ae30fc23a4c5c38650985db14a353c2e",
     "packages": [
         {
             "name": "a2lix/translation-form-bundle",
@@ -1393,6 +1393,77 @@
                 "persistence"
             ],
             "time": "2013-10-28 17:53:12"
+        },
+        {
+            "name": "doctrine/mongodb-odm-bundle",
+            "version": "dev-master",
+            "target-dir": "Doctrine/Bundle/MongoDBBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/doctrine/DoctrineMongoDBBundle.git",
+                "reference": "b7d25d7fab0149942d3a19c73c0544ef54b1bab7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/doctrine/DoctrineMongoDBBundle/zipball/b7d25d7fab0149942d3a19c73c0544ef54b1bab7",
+                "reference": "b7d25d7fab0149942d3a19c73c0544ef54b1bab7",
+                "shasum": ""
+            },
+            "require": {
+                "doctrine/mongodb-odm": "~1.0.0-beta5@dev",
+                "php": ">=5.3.2",
+                "symfony/doctrine-bridge": "~2.1",
+                "symfony/framework-bundle": "~2.1",
+                "symfony/options-resolver": "~2.1"
+            },
+            "require-dev": {
+                "doctrine/data-fixtures": "@dev",
+                "symfony/form": "~2.1",
+                "symfony/yaml": "~2.1"
+            },
+            "suggest": {
+                "doctrine/data-fixtures": "Load data fixtures"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "3.0-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Doctrine\\Bundle\\MongoDBBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Bulat Shakirzyanov",
+                    "email": "mallluhuct@gmail.com",
+                    "homepage": "http://avalanche123.com"
+                },
+                {
+                    "name": "Jonathan Wage",
+                    "email": "jonwage@gmail.com",
+                    "homepage": "http://www.jwage.com/",
+                    "role": "Creator"
+                },
+                {
+                    "name": "Kris Wallsmith",
+                    "email": "kris@symfony.com"
+                }
+            ],
+            "description": "Symfony2 Doctrine MongoDB Bundle",
+            "homepage": "http://www.doctrine-project.org",
+            "keywords": [
+                "mongodb",
+                "persistence",
+                "symfony"
+            ],
+            "time": "2013-10-28 20:35:52"
         },
         {
             "name": "doctrine/orm",
@@ -5971,6 +6042,7 @@
         "akeneo/demobundle": 20,
         "knplabs/knp-gaufrette-bundle": 20,
         "doctrine/mongodb-odm": 20,
+        "doctrine/mongodb-odm-bundle": 20,
         "behat/behat": 0
     },
     "platform": {
