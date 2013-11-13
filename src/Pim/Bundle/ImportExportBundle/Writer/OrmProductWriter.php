@@ -69,7 +69,7 @@ class OrmProductWriter extends AbstractConfigurableStepElement implements
         'Oro\\Bundle\\BatchBundle\\Entity\\StepExecution',
         'Oro\\Bundle\\UserBundle\\Entity\\User',
         'Oro\\Bundle\\OrganizationBundle\\Entity\\BusinessUnit',
-        'Oro\\Bundle\\FlexibleEntityBundle\\Entity\\Attribute',
+        'Pim\\Bundle\\FlexibleEntityBundle\\Entity\\Attribute',
         'Oro\\Bundle\\UserBundle\\Entity\\UserApi'
     );
     /**
@@ -106,7 +106,7 @@ class OrmProductWriter extends AbstractConfigurableStepElement implements
         $this->addVersionListener->setRealTimeVersioning(false);
         foreach ($items as $item) {
             $this->incrementCount($item);
-            $this->productManager->save($item, true);
+            $this->productManager->save($item, false);
         }
         $this->productManager->handleAllMedia($items);
         $this->stepExecution->setWriteCount(count($items));
@@ -129,6 +129,9 @@ class OrmProductWriter extends AbstractConfigurableStepElement implements
         $this->stepExecution = $stepExecution;
     }
 
+    /**
+     * @param ProductInterface $product
+     */
     protected function incrementCount(ProductInterface $product)
     {
         if ($product->getId()) {

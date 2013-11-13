@@ -4,10 +4,10 @@ namespace Pim\Bundle\CatalogBundle\Datagrid;
 
 use Oro\Bundle\GridBundle\Sorter\SorterInterface;
 
-use Oro\Bundle\FlexibleEntityBundle\Manager\FlexibleManager;
+use Pim\Bundle\FlexibleEntityBundle\Manager\FlexibleManager;
 
-use Oro\Bundle\FlexibleEntityBundle\AttributeType\AbstractAttributeType;
-use Oro\Bundle\FlexibleEntityBundle\Model\AbstractAttribute;
+use Pim\Bundle\FlexibleEntityBundle\AttributeType\AbstractAttributeType;
+use Pim\Bundle\FlexibleEntityBundle\Model\AbstractAttribute;
 use Oro\Bundle\GridBundle\Datagrid\FlexibleDatagridManager;
 use Oro\Bundle\GridBundle\Datagrid\ParametersInterface;
 use Oro\Bundle\GridBundle\Datagrid\ProxyQueryInterface;
@@ -102,7 +102,8 @@ class GroupProductDatagridManager extends FlexibleDatagridManager
                 'sortable'        => true,
                 'filter_type'     => FilterInterface::TYPE_BOOLEAN,
                 'filterable'      => true,
-                'filter_by_where' => true
+                'filter_by_where' => true,
+                'show_filter'     => true
             )
         );
 

@@ -5,8 +5,8 @@ namespace Pim\Bundle\CatalogBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use JMS\Serializer\Annotation\ExclusionPolicy;
-use Oro\Bundle\FlexibleEntityBundle\Entity\Mapping\AbstractEntityFlexibleValue;
-use Oro\Bundle\FlexibleEntityBundle\Entity\Mapping\AbstractEntityAttributeOption;
+use Pim\Bundle\FlexibleEntityBundle\Entity\Mapping\AbstractEntityFlexibleValue;
+use Pim\Bundle\FlexibleEntityBundle\Entity\Mapping\AbstractEntityAttributeOption;
 use Pim\Bundle\CatalogBundle\Model\ProductValueInterface;
 use Pim\Bundle\CatalogBundle\Model\ProductInterface;
 use Pim\Bundle\CatalogBundle\Entity\ProductPrice;
@@ -25,13 +25,13 @@ use Pim\Bundle\CatalogBundle\Entity\Media;
  *     @ORM\Index(name="integer_idx", columns={"value_integer"})
  * })
  * @ORM\Entity
- * 
+ *
  * @ExclusionPolicy("all")
  */
 class ProductValue extends AbstractEntityFlexibleValue implements ProductValueInterface
 {
     /**
-     * @var Oro\Bundle\FlexibleEntityBundle\Entity\Attribute $attribute
+     * @var Pim\Bundle\FlexibleEntityBundle\Entity\Attribute $attribute
      *
      * @ORM\ManyToOne(targetEntity="Pim\Bundle\CatalogBundle\Entity\ProductAttribute")
      * @ORM\JoinColumn(name="attribute_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
@@ -132,8 +132,9 @@ class ProductValue extends AbstractEntityFlexibleValue implements ProductValueIn
      * @ORM\OneToOne(
      *     targetEntity="Pim\Bundle\CatalogBundle\Entity\Media",
      *     cascade={"persist", "refresh"},
-     *     mappedBy="value"
+     *     inversedBy="value"
      * )
+     * @ORM\JoinColumn(name="media_id", referencedColumnName="id", onDelete="CASCADE")
      */
     protected $media;
 
@@ -142,7 +143,7 @@ class ProductValue extends AbstractEntityFlexibleValue implements ProductValueIn
      *
      * @var Metric $metric
      *
-     * @ORM\OneToOne(targetEntity="Oro\Bundle\FlexibleEntityBundle\Entity\Metric", cascade={"persist", "refresh"})
+     * @ORM\OneToOne(targetEntity="Pim\Bundle\FlexibleEntityBundle\Entity\Metric", cascade={"persist", "refresh"})
      * @ORM\JoinColumn(name="metric_id", referencedColumnName="id", onDelete="SET NULL")
      */
     protected $metric;

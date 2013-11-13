@@ -8,7 +8,7 @@ use JMS\Serializer\Annotation\ExclusionPolicy;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Oro\Bundle\EntityConfigBundle\Metadata\Annotation\Config;
-use Oro\Bundle\FlexibleEntityBundle\Entity\Mapping\AbstractEntityAttribute;
+use Pim\Bundle\FlexibleEntityBundle\Entity\Mapping\AbstractEntityAttribute;
 use Pim\Bundle\CatalogBundle\Entity\Locale;
 use Pim\Bundle\TranslationBundle\Entity\TranslatableInterface;
 use Pim\Bundle\TranslationBundle\Entity\AbstractTranslation;
@@ -35,7 +35,7 @@ use Pim\Bundle\TranslationBundle\Entity\AbstractTranslation;
  *      }
  *  }
  * )
- * 
+ *
  * @ExclusionPolicy("all")
  */
 class ProductAttribute extends AbstractEntityAttribute implements
@@ -309,19 +309,24 @@ class ProductAttribute extends AbstractEntityAttribute implements
 
         switch ($this->getBackendType()) {
             case 'option':
-                return $this->getDefaultOptions()->isEmpty() ? null : $this->getDefaultOptions()->first();
+                $default = $this->getDefaultOptions()->first() ?: null;
+                break;
             case 'options':
-                return $this->getDefaultOptions();
+                $default = $this->getDefaultOptions();
+                break;
             case 'date':
                 $date = new \DateTime();
                 $date->setTimestamp((int) $this->defaultValue);
-
-                return $date;
+                $default = $date;
+                break;
             case 'boolean':
-                return (bool) $this->defaultValue;
+                $default = (bool) $this->defaultValue;
+                break;
             default:
-                return $this->defaultValue;
+                $default = $this->defaultValue;
         }
+
+        return $default;
     }
 
     /**
