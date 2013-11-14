@@ -1,0 +1,15 @@
+parameters:                                                                                                                                                 
+    acme_custom_entity.repository.class: Doctrine\ORM\EntityRepository
+    acme_custom_entity.manufacturer.class: Acme\Bundle\CustomEntityBundle\Model\Manufacturer
+
+services:
+    acme_custom_entity.manager.manufacturer:
+        alias: "doctrine.orm.entity_manager"
+
+    acme_custom_entity.repository.manufacturer:
+        class:           %acme_custom_entity.repository.class%
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method:  getRepository
+        arguments:
+            - %acme_custom_entity.manufacturer.class%
+

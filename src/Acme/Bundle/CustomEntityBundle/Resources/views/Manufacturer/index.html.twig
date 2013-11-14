@@ -1,0 +1,45 @@
+{% extends 'PimCatalogBundle::layout.html.twig' %}
+ 
+{% set title = 'Manufacturers overview'|trans %}
+
+{% block head_script %}
+    {{ parent() }}
+{% endblock %}
+
+{% block content %}
+
+<div class="navigation clearfix navbar-extra navbar-extra-right">
+    {% set buttons %}
+        {{ elements.createBtn(
+            'New manufacturer',
+            path('acme_customentity_manufacturer_create'),
+            'create-manufacturer',
+            null
+        ) }}
+    {% endset %}
+
+    {{ elements.page_header(title, buttons, null) }}
+</div>
+
+<div class="container-fluid grid-container">
+    <table class="table table-bordered groups">
+        <thead>
+            <th>id</th>
+            <th>code</th>
+            <th>name</th>
+            <th>country</th>
+        </thead>
+        </tboddy>
+            {% for manufacturer in manufacturers %}
+                <tr>
+                    <td>{{ manufacturer.id }}</td>
+                    <td>{{ manufacturer.code }}</td>
+                    <td>{{ manufacturer.name }}</td>
+                    <td>{{ manufacturer.country }}</td>
+              </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
+

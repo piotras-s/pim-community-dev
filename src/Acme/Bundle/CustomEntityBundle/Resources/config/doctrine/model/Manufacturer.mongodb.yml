@@ -1,0 +1,19 @@
+Acme\Bundle\CustomEntityBundle\Model\Manufacturer:
+    uniqueContraints:
+        acme_custom_entity_manufacturer_code_uc:
+            columns:
+                - code
+    uniqueEntity:
+        fields:
+            - code
+        message: "This manufacturer code is already used."
+    fields:
+        id:
+            id:  true
+        code:
+            type: string
+        name:
+            type: string
+        country:
+            type: string
+

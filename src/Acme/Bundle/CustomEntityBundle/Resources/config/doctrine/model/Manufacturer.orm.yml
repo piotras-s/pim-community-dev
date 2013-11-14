@@ -1,0 +1,27 @@
+Acme\Bundle\CustomEntityBundle\Model\Manufacturer:
+    type: entity
+    table: acme_customentity_manufacturer
+    uniqueContraints:
+        acme_customentity_manufacturer_code_uc:
+            columns:
+                - code
+    uniqueEntity:
+        fields:
+            - code
+        message: "This manufacturer code is already used."
+    id:
+        id:
+            type: integer
+            generator:
+                strategy: AUTO
+    fields:
+        code:
+            type: string
+            length: 100
+        name:
+            type: string
+            length: 100
+        country:
+            type: string
+            length: 150
+            

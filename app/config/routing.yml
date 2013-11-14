@@ -110,3 +110,9 @@ _imagine:
 
 _apy_jsformvalidation:
     resource: "@APYJsFormValidationBundle/Resources/config/routing/routing.yml"
+
+acme_customentity:
+    resource: "@AcmeCustomEntityBundle/Controller/"
+    type:     annotation
+    prefix:   /custom-entity/
+

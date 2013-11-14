@@ -1,0 +1,15 @@
+parameters:                                                                                                                                                 
+    acme_custom_entity.repository.class: Doctrine\ODM\MongoDB\DocumentRepository
+    acme_custom_entity.manufacturer.class: Acme\Bundle\CustomEntityBundle\Model\Manufacturer
+
+services:
+    acme_custom_entity.manager.manufacturer:
+        alias: "doctrine.odm.mongodb.document_manager"
+
+    acme_custom_entity.repository.manufacturer:
+        class:           %acme_custom_entity.repository.class%
+        factory_service: doctrine.odm.mongodb.document_manager
+        factory_method:  getRepository
+        arguments:
+            - %acme_custom_entity.manufacturer.class%
+
