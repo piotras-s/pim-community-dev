@@ -209,6 +209,7 @@ class WebUser extends RawMinkContext
     public function iVisitTheTab($tab)
     {
         $this->getCurrentPage()->visitTab($tab);
+        $this->wait();
     }
 
     /**
