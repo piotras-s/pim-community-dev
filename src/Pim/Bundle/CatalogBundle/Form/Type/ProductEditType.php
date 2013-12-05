@@ -112,6 +112,6 @@ class ProductEditType extends AbstractType
      */
     public function finishView(FormView $view, FormInterface $form, array $options)
     {
-        $view->vars['groups'] = $this->productFormView->getView();
+        $view->vars['groups'] = $this->productFormView->getGroups($view);
     }
 }

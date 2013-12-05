@@ -2,13 +2,11 @@
 
 namespace Pim\Bundle\CatalogBundle\Form\Type;
 
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Form\FormView;
 use Symfony\Component\Form\FormInterface;
 use Oro\Bundle\FlexibleEntityBundle\Form\Type\FlexibleValueType;
-use Oro\Bundle\FlexibleEntityBundle\Manager\FlexibleManager;
-use Pim\Bundle\CatalogBundle\Form\View\ProductFormView;
 use Pim\Bundle\CatalogBundle\Model\ProductValueInterface;
+use Pim\Bundle\FlexibleEntityBundle\Form\Type\FlexibleValueType;
 
 /**
  * Product value form type
@@ -19,21 +17,6 @@ use Pim\Bundle\CatalogBundle\Model\ProductValueInterface;
  */
 class ProductValueType extends FlexibleValueType
 {
-    protected $productFormView;
-
-    /**
-     * {@inheritdoc}
-     */
-    public function __construct(
-        FlexibleManager $flexibleManager,
-        EventSubscriberInterface $subscriber,
-        ProductFormView $productFormView
-    ) {
-        parent::__construct($flexibleManager, $subscriber);
-
-        $this->productFormView = $productFormView;
-    }
-
     /**
      * {@inheritdoc}
      */

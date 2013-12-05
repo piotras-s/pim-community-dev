@@ -2,6 +2,7 @@ parameters:
     pim_catalog.imagine.local_dir_resolver.class:                  Pim\Bundle\CatalogBundle\Imagine\Cache\Resolver\LocalDirResolver
     pim_catalog.event_listener.progress.class:                     Pim\Bundle\CatalogBundle\EventListener\ProgressListener
     pim_catalog.event_listener.create_attribute_requirement.class: Pim\Bundle\CatalogBundle\EventListener\CreateAttributeRequirementSubscriber
+    pim_catalog.form.extension.attribute_option.class:             Pim\Bundle\CatalogBundle\Form\Extension\AttributeOptionExtension
 
 services:
     # Attribute property types
@@ -25,6 +26,11 @@ services:
         tags:
             - { name: form.type, alias: pim_image }
 
+    # form type extensions
+    pim_catalog.form.extension.attribute_option:
+        class: %pim_catalog.form.extension.attribute_option.class%
+        tags:
+            - { name: form.type_extension, alias: form }
     # Subscribers
     pim_catalog.form.subscriber.attribute:
         class:     %pim_catalog.form.subscriber.add_attribute_type.class%
