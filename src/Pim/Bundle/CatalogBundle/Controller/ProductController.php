@@ -327,28 +327,6 @@ class ProductController extends AbstractDoctrineController
         $channels = $this->getRepository('PimCatalogBundle:Channel')->findAll();
         $trees    = $this->categoryManager->getEntityRepository()->getProductsCountByTree($product);
 
-        $associations = $this->getRepository('PimCatalogBundle:Association')->findAll();
-
-        $associationProductGridManager = $this->datagridHelper->getDatagridManager('association_product');
-        $associationProductGridManager->setProduct($product);
-
-        $associationGroupGridManager = $this->datagridHelper->getDatagridManager('association_group');
-        $associationGroupGridManager->setProduct($product);
-
-        $association = null;
-        if (!empty($associations)) {
-            $association = reset($associations);
-            $associationProductGridManager->setAssociationId($association->getId());
-            $associationGroupGridManager->setAssociationId($association->getId());
-        }
-
-        $routeParameters = array('id' => $product->getId());
-        $associationProductGridManager->getRouteGenerator()->setRouteParameters($routeParameters);
-        $associationGroupGridManager->getRouteGenerator()->setRouteParameters($routeParameters);
-
-        $associationProductGridView = $associationProductGridManager->getDatagrid()->createView();
-        $associationGroupGridView = $associationGroupGridManager->getDatagrid()->createView();
-
         return array(
             'form'                   => $form->createView(),
             'dataLocale'             => $this->getDataLocale(),
@@ -359,10 +337,7 @@ class ProductController extends AbstractDoctrineController
             'trees'                  => $trees,
             'created'                => $this->auditManager->getOldestLogEntry($product),
             'updated'                => $this->auditManager->getNewestLogEntry($product),
-            'associations'           => $associations,
-            'associationProductGrid' => $associationProductGridView,
-            'associationGroupGrid'   => $associationGroupGridView,
-            'locales'                => $this->localeManager->getUserLocales()
+            'locales'                => $this->localeManager->getUserLocales(),
         );
     }
 
@@ -502,6 +477,54 @@ class ProductController extends AbstractDoctrineController
         $treesData = CategoryHelper::listCategoriesResponse($trees, $categories);
 
         return array('trees' => $treesData);
+    }
+
+    /**
+     * Display association grids
+     *
+     * @param int $id
+     *
+     * @AclAncestor("pim_catalog_product_associations_view")
+     *
+     * @return Response
+     */
+    public function associationsAction($id)
+    {
+        $product = $this->findProductOr404($id);
+
+        $this->productManager->ensureAllAssociations($product);
+
+        $associations = $this->getRepository('PimCatalogBundle:Association')->findAll();
+
+        $productGrid = $this->datagridHelper->getDatagridManager('association_product');
+        $productGrid->setProduct($product);
+
+        $groupGrid = $this->datagridHelper->getDatagridManager('association_group');
+        $groupGrid->setProduct($product);
+
+        $association = null;
+        if (!empty($associations)) {
+            $association = reset($associations);
+            $productGrid->setAssociationId($association->getId());
+            $groupGrid->setAssociationId($association->getId());
+        }
+
+        $routeParameters = array('id' => $product->getId());
+        $productGrid->getRouteGenerator()->setRouteParameters($routeParameters);
+        $groupGrid->getRouteGenerator()->setRouteParameters($routeParameters);
+
+        $productGridView = $productGrid->getDatagrid()->createView();
+        $groupGridView   = $groupGrid->getDatagrid()->createView();
+
+        return $this->render(
+            'PimCatalogBundle:Product:_associations.html.twig',
+            array(
+                'product'                => $product,
+                'associations'           => $associations,
+                'associationProductGrid' => $productGridView,
+                'associationGroupGrid'   => $groupGridView,
+            )
+        );
     }
 
     /**
