@@ -27,71 +27,82 @@ class ProductFormView
     /**
      * Returns an array of groups containing all attribute fields data
      *
+     * @param FormView $view
+     *
      * @return array
      */
     public function getGroups(FormView $view)
     {
-        $groups = array();
+        $groupsIndex = array();
         foreach ($view['values'] as $fieldView) {
-            $this->setFieldValue($groups, $fieldView);
+            $this->buildIndex($groupsIndex, $fieldView);
         }
+        krsort($groupsIndex);
 
-        foreach ($groups as &$group) {
-            ksort($group['orderedAttributes']);
-            foreach ($group['orderedAttributes'] as $attributes) {
-                $group['attributes'] += $attributes;
+        $groups = array();
+        foreach ($groupsIndex as $groupIndex) {
+            foreach ($groupIndex as $groupId => $groupInfo) {
+                $groups[$groupId] = $this->getGroupView($groupInfo);
             }
-            unset($group['orderedAttributes']);
         }
 
         return $groups;
     }
 
     /**
-     * Sets an attribute's values inside an array of groups
+     * Returns the view for a group
+     *
+     * @param array $groupInfo
+     *
+     * @retur array
+     */
+    protected function getGroupView(array $groupInfo)
+    {
+        $view = array(
+            'label'      => $groupInfo['label'],
+            'attributes' => array()
+        );
+
+        ksort($groupInfo['attributes']);
+        foreach ($groupInfo['attributes'] as $attributes) {
+            $view['attributes'] += $attributes;
+        }
+
+        return $view;
+    }
+
+    /**
+     * Sets an attribute's values inside an array of indexed groups
      *
      * @param array    $groups
      * @param FormView $view
      */
-    protected function setFieldValue(array &$groups, FormView $view)
+    protected function buildIndex(array &$groups, FormView $view)
     {
-        $attribute = $this->getAttribute($view);
+        $value = $view->vars['value'];
+        $attribute = $value->getAttribute();
         $group = $attribute->getVirtualGroup();
         $groupId = $group->getId();
-        $order = $attribute->getSortOrder();
-        if (!isset($groups[$groupId]['orderedAttributes'][$order])) {
-            if (!isset($groups[$groupId])) {
-                $groups[$groupId] = array();
-                $groups[$groupId] = array(
-                    'label'                 => $group->getLabel(),
-                    'orderedAttributes'     => array(),
-                    'attributes'            => array()
+        $groupOrder = $group->getSortOrder();
+        $attributeOrder = $attribute->getSortOrder();
+        if (!isset($groups[$groupOrder][$groupId]['attributes'][$attributeOrder])) {
+            if (!isset($groups[$groupOrder][$groupId])) {
+                if (!isset($groups[$groupOrder])) {
+                    $groups[$groupOrder] = array();
+                }
+                $groups[$groupOrder][$groupId] = array(
+                    'label'      => $group->getLabel(),
+                    'attributes' => array()
                 );
             }
-            $groups[$groupId]['orderedAttributes'][$order] = array();
+            $groups[$groupOrder][$groupId]['attributes'][$attributeOrder] = array();
         }
-        
-        $value = $view->vars['value'];
-        $groups[$groupId]['orderedAttributes'][$order][$value->getId()] = $this->getValueView(
+
+        $groups[$groupOrder][$groupId]['attributes'][$attributeOrder][$attribute->getId()] = $this->getAttributeView(
             $value,
             $attribute,
             $view
         );
-    }
-
-    /**
-     * Returns the attribute corresponding to a view
-     *
-     * @param  FormView         $view
-     * @return ProductAttribute
-     */
-    protected function getAttribute(FormView $view)
-    {
-        foreach ($view as $valueView) {
-            if (isset($valueView['flexibleAttribute'])) {
-                return $valueView->vars['flexibleAttribute'];
-            }
-        }
     }
 
     /**
@@ -124,7 +135,7 @@ class ProductFormView
      *
      * @return array
      */
-    protected function getValueView(ProductValueInterface $value, ProductAttribute $attribute, FormView $view)
+    protected function getAttributeView(ProductValueInterface $value, ProductAttribute $attribute, FormView $view)
     {
         $attributeView = array(
             'isRemovable'        => $value->isRemovable(),

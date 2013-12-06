@@ -26,11 +26,6 @@ services:
         tags:
             - { name: form.type, alias: pim_image }
 
-    # form type extensions
-    pim_catalog.form.extension.attribute_option:
-        class: %pim_catalog.form.extension.attribute_option.class%
-        tags:
-            - { name: form.type_extension, alias: form }
     # Subscribers
     pim_catalog.form.subscriber.attribute:
         class:     %pim_catalog.form.subscriber.add_attribute_type.class%
