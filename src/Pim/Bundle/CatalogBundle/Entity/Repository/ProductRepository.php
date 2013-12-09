@@ -179,15 +179,13 @@ class ProductRepository extends FlexibleEntityRepository
     {
         return $this
             ->createQueryBuilder('p')
-            ->select('p, f, v, pr, m, o, os, a, g')
+            ->select('p, f, v, pr, m, o, os')
             ->leftJoin('p.family', 'f')
             ->leftJoin('p.values', 'v')
             ->leftJoin('v.prices', 'pr')
             ->leftJoin('v.media', 'm')
             ->leftJoin('v.option', 'o')
             ->leftJoin('v.options', 'os')
-            ->leftJoin('v.attribute', 'a')
-            ->leftJoin('a.group', 'g')
             ->where('p.id=:id')
             ->setParameter('id', $id)
             ->getQuery()

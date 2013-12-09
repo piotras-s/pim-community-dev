@@ -292,7 +292,7 @@ class ProductController extends AbstractDoctrineController
      */
     public function editAction(Request $request, $id)
     {
-        $product = $this->findProductOr404($id, true);
+        $product = $this->findProductOr404($id);
 
         $this->productManager->ensureAllAssociations($product);
 
@@ -650,13 +650,9 @@ class ProductController extends AbstractDoctrineController
      *
      * @throws Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      */
-    protected function findProductOr404($id, $full = false)
+    protected function findProductOr404($id)
     {
-        if ($full) {
-            $product = $this->productManager->getFlexibleRepository()->getFullProduct($id);
-        } else {
-            $product = $this->productManager->find($id);
-        }
+        $product = $this->productManager->find($id);
 
         if (!$product) {
             throw $this->createNotFoundException(
