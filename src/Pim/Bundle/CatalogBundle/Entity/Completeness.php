@@ -53,6 +53,11 @@ class Completeness
      */
     protected $product;
 
+    /**
+     * @var int
+     */
+    protected $productId;
+
     protected $missingAttributes;
 
     /**

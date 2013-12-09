@@ -149,6 +149,7 @@ class ProductController extends AbstractDoctrineController
         //$gridManager->setFilterCategoryId($request->get('categoryId', 0));
         //$gridManager->setIncludeSub($request->get('includeSub', 0));
         //$datagrid = $gridManager->getDatagrid();
+        $products = $this->productManager->getFlexibleRepository()->findAll();
 
         switch ($request->getRequestFormat()) {
             case 'json':
@@ -187,6 +188,7 @@ class ProductController extends AbstractDoctrineController
 
         $params = array(
             'datagrid'   => "FIXME_MONGO: Datagrid non compatible with MongoDB",
+            'products'   => $products,
             //'datagrid'   => $datagrid->createView(),
             'locales'    => $this->localeManager->getUserLocales(),
             'dataLocale' => $this->getDataLocale(),

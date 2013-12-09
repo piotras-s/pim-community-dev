@@ -35,6 +35,11 @@ class ProductAssociation
     protected $owner;
 
     /**
+     * @var int
+     */
+    protected $ownerId;
+
+    /**
      * @var ProductInterface[] $products
      */
     protected $products;

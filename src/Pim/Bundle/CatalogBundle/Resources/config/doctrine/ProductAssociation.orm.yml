@@ -8,9 +8,9 @@ Pim\Bundle\CatalogBundle\Entity\ProductAssociation:
             id: true
             generator:
                 strategy: AUTO
-        productOwnerId:
+        ownerId:
             type: integer
-            column: product_owner_id
+            column: owner_id
     manyToOne:
         association:
             targetEntity: Pim\Bundle\CatalogBundle\Entity\Association
