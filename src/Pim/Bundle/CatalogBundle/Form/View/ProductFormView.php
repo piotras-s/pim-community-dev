@@ -2,9 +2,10 @@
 
 namespace Pim\Bundle\CatalogBundle\Form\View;
 
-use Pim\Bundle\CatalogBundle\Entity\ProductAttribute;
-use Pim\Bundle\CatalogBundle\Model\ProductValueInterface;
 use Symfony\Component\Form\FormView;
+use Pim\Bundle\CatalogBundle\Model\ProductValueInterface;
+use Pim\Bundle\CatalogBundle\Entity\AttributeGroup;
+use Pim\Bundle\CatalogBundle\Entity\ProductAttribute;
 
 /**
  * Custom form view for Product form
@@ -25,73 +26,63 @@ class ProductFormView
     );
 
     /**
-     * Returns an array of groups containing all attribute fields data
-     *
-     * @return array
+     * @var FormView|array
      */
-    public function getGroups(FormView $view)
+    protected $view = array();
+
+    /**
+     * @return FormView
+     */
+    public function getView()
     {
-        $groups = array();
-        foreach ($view['values'] as $fieldView) {
-            $this->setFieldValue($groups, $fieldView);
-        }
-
-        foreach ($groups as &$group) {
-            ksort($group['orderedAttributes']);
-            foreach ($group['orderedAttributes'] as $attributes) {
-                $group['attributes'] += $attributes;
-            }
-            unset($group['orderedAttributes']);
-        }
-
-        return $groups;
+        return $this->view;
     }
 
     /**
-     * Sets an attribute's values inside an array of groups
-     *
-     * @param array    $groups
-     * @param FormView $view
+     * @param ProductValueInterface $value
+     * @param FormView              $view
      */
-    protected function setFieldValue(array &$groups, FormView $view)
+    public function addChildren(ProductValueInterface $value, FormView $view)
     {
-        $attribute = $this->getAttribute($view);
+        $attribute = $value->getAttribute();
         $group = $attribute->getVirtualGroup();
-        $groupId = $group->getId();
-        $order = $attribute->getSortOrder();
-        if (!isset($groups[$groupId]['orderedAttributes'][$order])) {
-            if (!isset($groups[$groupId])) {
-                $groups[$groupId] = array();
-                $groups[$groupId] = array(
-                    'label'                 => $group->getLabel(),
-                    'orderedAttributes'     => array(),
-                    'attributes'            => array()
-                );
-            }
-            $groups[$groupId]['orderedAttributes'][$order] = array();
+
+        if (!$this->hasGroup($group)) {
+            $this->initializeGroup($group);
         }
-        
-        $value = $view->vars['value'];
-        $groups[$groupId]['orderedAttributes'][$order][$value->getId()] = $this->getValueView(
-            $value,
-            $attribute,
-            $view
-        );
+
+        $this->addValue($value, $view);
+
+        $this->orderGroupAttributes($group);
     }
 
     /**
-     * Returns the attribute corresponding to a view
-     *
-     * @param  FormView         $view
-     * @return ProductAttribute
+     * @param AttributeGroup $group
      */
-    protected function getAttribute(FormView $view)
+    protected function orderGroupAttributes(AttributeGroup $group)
     {
-        foreach ($view as $valueView) {
-            if (isset($valueView['flexibleAttribute'])) {
-                return $valueView->vars['flexibleAttribute'];
-            }
-        }
+        $this->view[$group->getId()]['attributes'] = $this->sortAttributes($this->view[$group->getId()]['attributes']);
+    }
+
+    /**
+     * @param AttributeGroup $group
+     *
+     * @return boolean
+     */
+    protected function hasGroup(AttributeGroup $group)
+    {
+        return isset($this->view[$group->getId()]);
+    }
+
+    /**
+     * @param AttributeGroup $group
+     */
+    protected function initializeGroup(AttributeGroup $group)
+    {
+        $this->view[$group->getId()] = array(
+            'label'      => $group->getLabel(),
+            'attributes' => array(),
+        );
     }
 
     /**
@@ -119,13 +110,13 @@ class ProductFormView
 
     /**
      * @param ProductValueInterface $value
-     * @param ProductAttribute      $attribute
      * @param FormView              $view
-     *
-     * @return array
      */
-    protected function getValueView(ProductValueInterface $value, ProductAttribute $attribute, FormView $view)
+    protected function addValue(ProductValueInterface $value, FormView $view)
     {
+        $attribute = $value->getAttribute();
+        $group     = $attribute->getVirtualGroup();
+
         $attributeView = array(
             'isRemovable'        => $value->isRemovable(),
             'code'               => $attribute->getCode(),
@@ -148,7 +139,7 @@ class ProductFormView
             $attributeView['classes'] = $classes;
         }
 
-        return $attributeView;
+        $this->view[$group->getId()]['attributes'][$attribute->getId()] = $attributeView;
     }
 
     /**
@@ -164,5 +155,28 @@ class ProductFormView
         }
 
         return $this->view[$group->getId()]['attributes'][$attribute->getId()]['values'];
+    }
+
+    /**
+     * Sort an array of by the values of its sortOrder key
+     *
+     * @param array $attributes
+     *
+     * @return array
+     */
+    protected function sortAttributes(array $attributes)
+    {
+        uasort(
+            $attributes,
+            function ($first, $second) {
+                if ($first['sortOrder'] === $second['sortOrder']) {
+                    return 0;
+                }
+
+                return $first['sortOrder'] > $second['sortOrder'] ? 1 : -1;
+            }
+        );
+
+        return $attributes;
     }
 }
