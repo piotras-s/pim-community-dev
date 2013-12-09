@@ -70,7 +70,7 @@ class ProductBuilder
      * @param string          $productClass    Entity name
      * @param ObjectManager   $objectManager   Storage manager
      * @param ChannelManager  $channelManager  Channel Manager
-     * @param LocaleManager   $localManager    Locale Manager
+     * @param LocaleManager   $localeManager   Locale Manager
      * @param CurrencyManager $currencyManager Currency manager
      */
     public function __construct(
@@ -195,9 +195,6 @@ class ProductBuilder
      */
     protected function getProductValueClass()
     {
-        //FIXME_MONGO
-        return "Pim\Bundle\CatalogBundle\Model\ProductValue";
-
         if (!$this->productValueClass) {
             $meta = $this->objectManager->getClassMetadata($this->productClass);
             $associations = $meta->getAssociationMappings();

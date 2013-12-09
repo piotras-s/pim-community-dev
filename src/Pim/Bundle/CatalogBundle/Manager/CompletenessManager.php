@@ -45,6 +45,8 @@ class CompletenessManager
      *
      * @param RegistryInterface        $doctrine
      * @param CompletenessQueryBuilder $completenessQB
+     * @param ValidatorInterface       $validator
+     * @param string                   $class
      */
     public function __construct(
         RegistryInterface $doctrine,
@@ -95,9 +97,6 @@ class CompletenessManager
      */
     public function schedule(ProductInterface $product)
     {
-        // FIXME_MONGO: relation with completeness is not possible anymore
-        // must use product id
-        return;
         if ($product->getId()) {
             $query = $this->doctrine->getManager()->createQuery(
                 "DELETE FROM $this->class c WHERE c.product = :product"
@@ -110,9 +109,11 @@ class CompletenessManager
     /**
      * Returns an array containing all completeness info and missing attributes for a product
      *
-     * @param  ProductInterface $product
-     * @param  array            $channels
-     * @param  array            $locales
+     * @param ProductInterface $product
+     * @param array            $channels
+     * @param array            $locales
+     * @param string           $localeCode
+     *
      * @return array
      */
     public function getProductCompleteness(ProductInterface $product, array $channels, array $locales, $localeCode)
@@ -160,7 +161,7 @@ class CompletenessManager
     /**
      * Adds a requirement to the completenesses
      *
-     * @param array                $completenesses
+     * @param array                &$completenesses
      * @param AttributeRequirement $requirement
      * @param ArrayCollection      $productValues
      * @param array                $localeCodes
@@ -220,8 +221,6 @@ class CompletenessManager
      */
     protected function createCompletenesses(array $criteria, $limit = null)
     {
-        // FIXME_MONGO
-        return;
         $sql = $this->completenessQB->getInsertCompletenessSQL($criteria, $limit);
         $stmt = $this->doctrine->getConnection()->prepare($sql);
 
