@@ -2,7 +2,11 @@
 
 namespace Pim\Bundle\CatalogBundle\Form\Type;
 
+use Symfony\Component\Form\FormView;
+use Symfony\Component\Form\FormInterface;
 use Oro\Bundle\FlexibleEntityBundle\Form\Type\FlexibleValueType;
+use Pim\Bundle\CatalogBundle\Model\ProductValueInterface;
+use Pim\Bundle\FlexibleEntityBundle\Form\Type\FlexibleValueType;
 
 /**
  * Product value form type
@@ -13,6 +17,16 @@ use Oro\Bundle\FlexibleEntityBundle\Form\Type\FlexibleValueType;
  */
 class ProductValueType extends FlexibleValueType
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function buildView(FormView $view, FormInterface $form, array $options)
+    {
+        if ($form->getData() instanceof ProductValueInterface) {
+            $this->productFormView->addChildren($form->getData(), $view);
+        }
+    }
+
     /**
      * {@inheritdoc}
      */
