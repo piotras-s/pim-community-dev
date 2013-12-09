@@ -97,6 +97,9 @@ class CompletenessManager
      */
     public function schedule(ProductInterface $product)
     {
+        // FIXME_MONGO: relation with completeness is not possible anymore
+        // must use product id
+        return;
         if ($product->getId()) {
             $query = $this->doctrine->getManager()->createQuery(
                 "DELETE FROM $this->class c WHERE c.product = :product"
@@ -221,6 +224,8 @@ class CompletenessManager
      */
     protected function createCompletenesses(array $criteria, $limit = null)
     {
+        // FIXME_MONGO
+        return;
         $sql = $this->completenessQB->getInsertCompletenessSQL($criteria, $limit);
         $stmt = $this->doctrine->getConnection()->prepare($sql);
 
