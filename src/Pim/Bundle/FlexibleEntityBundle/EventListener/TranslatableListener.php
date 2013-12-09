@@ -69,10 +69,15 @@ class TranslatableListener implements EventSubscriber
                 $flexibleEntityClass = ClassUtils::getRealClass(get_class($entity));
             }
 
-            $metadata = $args->getEntityManager()->getClassMetadata($flexibleEntityClass);
+            // FIXME_MONGO: Not clean, must find something else to get metadata.
+            // FlexibleEntityBundle should not need to know about pim_catalog stuff
+            //$metadata = $args->getEntityManager()->getClassMetadata($flexibleEntityClass);
+
             $flexibleConfig = $this->container->getParameter('pim_flexibleentity.flexible_config');
+            // FIXME_MONGO
+            // isMappedSuperclass() does not exist on MongoDB ODM
+            //    !$metadata->isMappedSuperclass &&
             if ($flexibleEntityClass &&
-                !$metadata->isMappedSuperclass &&
                 array_key_exists($flexibleEntityClass, $flexibleConfig['entities_config'])) {
 
                 // get flexible config and manager

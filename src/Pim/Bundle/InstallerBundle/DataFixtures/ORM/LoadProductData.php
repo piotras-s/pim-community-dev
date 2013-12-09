@@ -21,6 +21,8 @@ class LoadProductData extends AbstractInstallerFixture
      */
     public function load(ObjectManager $manager)
     {
+        //FIXME_MONGO: Load ORM entities only in ORM mode
+        return;
         $configuration = Yaml::parse(realpath($this->getFilePath()));
         $processor = $this->getProductProcessor();
         if (isset($configuration['products'])) {
