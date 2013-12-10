@@ -44,7 +44,7 @@ define(
                 });
 
                 // Apply Select2
-                initSelect2();
+                initSelect2.init($("body"));
 
                 // Apply bootstrapSwitch
                 $target.find('.switch:not(.has-switch)').bootstrapSwitch();
