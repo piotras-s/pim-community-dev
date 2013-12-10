@@ -22,7 +22,7 @@ Pim\Bundle\CatalogBundle\Entity\Completeness:
             type: integer
             column: required_count
         productId:
-            type: integer
+            type: string
             column: product_id
     manyToOne:
         locale:

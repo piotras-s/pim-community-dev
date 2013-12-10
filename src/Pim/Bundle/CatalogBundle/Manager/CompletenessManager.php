@@ -115,7 +115,7 @@ class CompletenessManager
      * @param ProductInterface $product
      * @param array            $channels
      * @param array            $locales
-     * @param string           $localeCode
+     * @param string           $localeCode Locale used for labels of attributes specified in the requirements
      *
      * @return array
      */
@@ -147,7 +147,7 @@ class CompletenessManager
         }
         $requirements = $this->doctrine
             ->getRepository(get_class($family))
-            ->getFullRequirementsQB($family, $locale)
+            ->getFullRequirementsQB($family, $localeCode)
             ->getQuery()
             ->getResult();
 
@@ -212,8 +212,8 @@ class CompletenessManager
             ->select('co, lo, ch')
             ->innerJoin('co.locale', 'lo')
             ->innerJoin('co.channel', 'ch')
-            ->where('co.product = :product')
-            ->setParameter('product', $product);
+            ->where('co.productId = :productId')
+            ->setParameter('productId', $product->getId());
     }
 
     /**
