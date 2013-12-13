@@ -16,7 +16,7 @@ pim_catalog_product_edit:
 
 pim_catalog_product_addproductattributes:
     path: /{id}/attributes
-    defaults: { _controller: pim_catalog.controller.product:addProductAttributeInterfacesAction }
+    defaults: { _controller: pim_catalog.controller.product:addProductAttributesAction }
     requirements:
         id: "[0-9a-f]+"
     methods: [POST]

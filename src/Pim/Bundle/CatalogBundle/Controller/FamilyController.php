@@ -249,7 +249,7 @@ class FamilyController extends AbstractDoctrineController
      * @AclAncestor("pim_catalog_family_add_attribute")
      * @return Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function addProductAttributeInterfacesAction(Family $family)
+    public function addProductAttributesAction(Family $family)
     {
         $availableAttributes = new AvailableProductAttributes();
         $attributesForm      = $this->getAvailableProductAttributesForm(

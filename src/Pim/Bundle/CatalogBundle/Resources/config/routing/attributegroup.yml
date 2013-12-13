@@ -26,7 +26,7 @@ pim_catalog_attributegroup_remove:
 
 pim_catalog_attributegroup_addproductattributes:
     path: /{id}/attributes
-    defaults: { _controller: pim_catalog.controller.attribute_group:addProductAttributeInterfacesAction }
+    defaults: { _controller: pim_catalog.controller.attribute_group:addProductAttributesAction }
     requirements:
         id: \d+
     methods: [POST]

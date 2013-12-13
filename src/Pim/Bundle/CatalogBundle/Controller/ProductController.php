@@ -418,7 +418,7 @@ class ProductController extends AbstractDoctrineController
      * @AclAncestor("pim_catalog_product_add_attribute")
      * @return Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function addProductAttributeInterfacesAction(Request $request, $id)
+    public function addProductAttributesAction(Request $request, $id)
     {
         $product             = $this->findProductOr404($id);
         $availableAttributes = new AvailableProductAttributes();

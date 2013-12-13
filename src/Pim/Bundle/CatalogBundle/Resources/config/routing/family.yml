@@ -23,7 +23,7 @@ pim_catalog_family_remove:
 
 pim_catalog_family_addproductattributes:
     path: /{id}/attributes
-    defaults: { _controller: pim_catalog.controller.family:addProductAttributeInterfacesAction }
+    defaults: { _controller: pim_catalog.controller.family:addProductAttributesAction }
     requirements:
         id: \d+
     methods: [POST]
