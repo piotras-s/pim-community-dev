@@ -5,7 +5,7 @@ namespace Pim\Bundle\ImportExportBundle\Cache;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Pim\Bundle\CatalogBundle\Entity\Group;
 use Pim\Bundle\CatalogBundle\Entity\Family;
-use Pim\Bundle\CatalogBundle\Entity\ProductAttribute;
+use Pim\Bundle\CatalogBundle\Model\ProductAttributeInterface;
 use Pim\Bundle\CatalogBundle\Model\ProductInterface;
 
 /**
@@ -64,7 +64,7 @@ class AttributeCache
             )
         );
 
-        $attributes = $this->doctrine->getRepository('PimCatalogBundle:ProductAttribute')
+        $attributes = $this->doctrine->getRepository('PimCatalogBundle:ProductAttributeInterface')
                 ->findBy(array('code' => $codes));
         $attributeMap = array();
         foreach ($attributes as $attribute) {

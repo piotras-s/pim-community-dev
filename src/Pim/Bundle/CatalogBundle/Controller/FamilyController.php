@@ -249,7 +249,7 @@ class FamilyController extends AbstractDoctrineController
      * @AclAncestor("pim_catalog_family_add_attribute")
      * @return Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function addProductAttributesAction(Family $family)
+    public function addProductAttributeInterfacesAction(Family $family)
     {
         $availableAttributes = new AvailableProductAttributes();
         $attributesForm      = $this->getAvailableProductAttributesForm(
@@ -281,10 +281,10 @@ class FamilyController extends AbstractDoctrineController
      *
      * @throws DeleteException
      */
-    public function removeProductAttributeAction($familyId, $attributeId)
+    public function removeProductAttributeInterfaceAction($familyId, $attributeId)
     {
         $family    = $this->findOr404('PimCatalogBundle:Family', $familyId);
-        $attribute = $this->findOr404('PimCatalogBundle:ProductAttribute', $attributeId);
+        $attribute = $this->findOr404('PimCatalogBundle:ProductAttributeInterface', $attributeId);
 
         if (false === $family->hasAttribute($attribute)) {
             throw new DeleteException($this->getTranslator()->trans('flash.family.attribute not found'));
@@ -304,7 +304,7 @@ class FamilyController extends AbstractDoctrineController
     }
 
     /**
-     * Get the AvailbleProductAttributes form
+     * Get the AvailbleProductAttributeInterfaces form
      *
      * @param array                      $attributes          The product attributes
      * @param AvailableProductAttributes $availableAttributes The available attributes container

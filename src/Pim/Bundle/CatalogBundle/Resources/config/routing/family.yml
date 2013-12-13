@@ -23,14 +23,14 @@ pim_catalog_family_remove:
 
 pim_catalog_family_addproductattributes:
     path: /{id}/attributes
-    defaults: { _controller: pim_catalog.controller.family:addProductAttributesAction }
+    defaults: { _controller: pim_catalog.controller.family:addProductAttributeInterfacesAction }
     requirements:
         id: \d+
     methods: [POST]
 
 pim_catalog_family_removeproductattribute:
     path: /{familyId}/attribute/{attributeId}/remove
-    defaults: { _controller: pim_catalog.controller.family:removeProductAttributeAction }
+    defaults: { _controller: pim_catalog.controller.family:removeProductAttributeInterfaceAction }
     requirements:
         familyId: \d+
         attributeId: \d+

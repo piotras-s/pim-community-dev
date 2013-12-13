@@ -2,7 +2,7 @@
 
 namespace Pim\Bundle\CatalogBundle\Tests\Unit\Validator\Constraints;
 
-use Pim\Bundle\CatalogBundle\Entity\ProductAttribute;
+use Pim\Bundle\CatalogBundle\Model\ProductAttributeInterface;
 use Pim\Bundle\CatalogBundle\Validator\Constraints\ValidMetric;
 use Pim\Bundle\CatalogBundle\Validator\Constraints\ValidMetricValidator;
 
@@ -73,11 +73,11 @@ class ValidMetricValidatorTest extends \PHPUnit_Framework_TestCase
      * @param string $metricFamily
      * @param string $metricUnit
      *
-     * @return ProductAttribute
+     * @return ProductAttributeInterface
      */
-    protected function createProductAttribute($metricFamily, $metricUnit = '')
+    protected function createProductAttributeInterface($metricFamily, $metricUnit = '')
     {
-        $attribute = new ProductAttribute();
+        $attribute = new ProductAttributeInterface();
 
         $attribute->setAttributeType('pim_catalog_metric');
         $attribute->setMetricFamily($metricFamily);
@@ -95,7 +95,7 @@ class ValidMetricValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testMetricFamilyInvalid($metricFamily)
     {
-        $attribute = $this->createProductAttribute($metricFamily);
+        $attribute = $this->createProductAttributeInterface($metricFamily);
 
         $this->context->expects($this->once())
             ->method('addViolationAt')
@@ -130,7 +130,7 @@ class ValidMetricValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testMetricUnitInvalid($metricFamily, $metricUnit)
     {
-        $attribute = $this->createProductAttribute($metricFamily, $metricUnit);
+        $attribute = $this->createProductAttributeInterface($metricFamily, $metricUnit);
 
         $this->context->expects($this->once())
             ->method('addViolationAt')
@@ -165,7 +165,7 @@ class ValidMetricValidatorTest extends \PHPUnit_Framework_TestCase
      */
     public function testMetricFamilyAndUnitValid($metricFamily, $metricUnit)
     {
-        $attribute = $this->createProductAttribute($metricFamily, $metricUnit);
+        $attribute = $this->createProductAttributeInterface($metricFamily, $metricUnit);
 
         $this->context->expects($this->never())
             ->method('addViolationAt');

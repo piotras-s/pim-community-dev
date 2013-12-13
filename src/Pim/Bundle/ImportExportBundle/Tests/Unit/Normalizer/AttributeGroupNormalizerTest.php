@@ -5,7 +5,7 @@ namespace Pim\Bundle\ImportExportBundle\Tests\Unit\Normalizer;
 use Pim\Bundle\ImportExportBundle\Normalizer\AttributeGroupNormalizer;
 use Pim\Bundle\ImportExportBundle\Normalizer\TranslationNormalizer;
 use Pim\Bundle\CatalogBundle\Entity\AttributeGroup;
-use Pim\Bundle\CatalogBundle\Entity\ProductAttribute;
+use Pim\Bundle\CatalogBundle\Model\ProductAttributeInterface;
 
 /**
  * Attribute group normalizer test
@@ -97,13 +97,13 @@ class AttributeGroupNormalizerTest extends NormalizerTestCase
      * Get attributes
      * @param array $data
      *
-     * @return ProductAttribute[]
+     * @return ProductAttributeInterface[]
      */
     protected function getAttributes($data)
     {
         $attributes = array();
         foreach ($data['attributes'] as $code) {
-            $attribute = new ProductAttribute();
+            $attribute = new ProductAttributeInterface();
             $attribute->setCode($code);
             $attributes[] = $attribute;
         }

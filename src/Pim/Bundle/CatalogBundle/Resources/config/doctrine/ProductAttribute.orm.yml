@@ -1,4 +1,4 @@
-Pim\Bundle\CatalogBundle\Entity\ProductAttribute:
+Pim\Bundle\CatalogBundle\Model\ProductAttributeInterface:
     type: entity
     table: pim_catalog_attribute
     indexes:

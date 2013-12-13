@@ -9,7 +9,7 @@
 
 {% block content %}
 
-    {% include 'PimCatalogBundle:ProductAttribute:_available-attributes-form.html.twig' with {
+    {% include 'PimCatalogBundle:ProductAttributeInterface:_available-attributes-form.html.twig' with {
         'form': attributesForm,
         'action': path('pim_catalog_product_addproductattributes', {'id': product.id, 'dataLocale': dataLocale})
     } %}

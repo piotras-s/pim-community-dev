@@ -242,7 +242,7 @@ class ProductAttribute extends AbstractEntityAttribute implements
      *
      * @param mixed $defaultValue
      *
-     * @return ProductAttribute
+     * @return ProductAttributeInterface
      */
     public function setDefaultValue($defaultValue)
     {
@@ -325,7 +325,7 @@ class ProductAttribute extends AbstractEntityAttribute implements
      *
      * @param AttributeGroup $group
      *
-     * @return ProductAttribute
+     * @return ProductAttributeInterface
      */
     public function setGroup(AttributeGroup $group = null)
     {
@@ -349,7 +349,7 @@ class ProductAttribute extends AbstractEntityAttribute implements
      *
      * @param boolean $useableAsGridColumn
      *
-     * @return ProductAttribute
+     * @return ProductAttributeInterface
      */
     public function setUseableAsGridColumn($useableAsGridColumn)
     {
@@ -373,7 +373,7 @@ class ProductAttribute extends AbstractEntityAttribute implements
      *
      * @param boolean $useableAsGridFilter
      *
-     * @return ProductAttribute
+     * @return ProductAttributeInterface
      */
     public function setUseableAsGridFilter($useableAsGridFilter)
     {
@@ -387,7 +387,7 @@ class ProductAttribute extends AbstractEntityAttribute implements
      *
      * @param Locale $availableLocale
      *
-     * @return ProductAttribute
+     * @return ProductAttributeInterface
      */
     public function addAvailableLocale(Locale $availableLocale)
     {
@@ -401,7 +401,7 @@ class ProductAttribute extends AbstractEntityAttribute implements
      *
      * @param Locale $availableLocale
      *
-     * @return ProductAttribute
+     * @return ProductAttributeInterface
      */
     public function removeAvailableLocale(Locale $availableLocale)
     {
@@ -425,7 +425,7 @@ class ProductAttribute extends AbstractEntityAttribute implements
      *
      * @param ArrayCollection $availableLocales
      *
-     * @return ProductAttribute
+     * @return ProductAttributeInterface
      */
     public function setAvailableLocales($availableLocales)
     {
@@ -449,7 +449,7 @@ class ProductAttribute extends AbstractEntityAttribute implements
      *
      * @param integer $maxCharacters
      *
-     * @return ProductAttribute
+     * @return ProductAttributeInterface
      */
     public function setMaxCharacters($maxCharacters)
     {
@@ -473,7 +473,7 @@ class ProductAttribute extends AbstractEntityAttribute implements
      *
      * @param string $validationRule
      *
-     * @return ProductAttribute
+     * @return ProductAttributeInterface
      */
     public function setValidationRule($validationRule)
     {
@@ -497,7 +497,7 @@ class ProductAttribute extends AbstractEntityAttribute implements
      *
      * @param string $validationRegexp
      *
-     * @return ProductAttribute
+     * @return ProductAttributeInterface
      */
     public function setValidationRegexp($validationRegexp)
     {
@@ -521,7 +521,7 @@ class ProductAttribute extends AbstractEntityAttribute implements
      *
      * @param boolean $wysiwygEnabled
      *
-     * @return ProductAttribute
+     * @return ProductAttributeInterface
      */
     public function setWysiwygEnabled($wysiwygEnabled)
     {
@@ -545,7 +545,7 @@ class ProductAttribute extends AbstractEntityAttribute implements
      *
      * @param mixed $numberMin
      *
-     * @return ProductAttribute
+     * @return ProductAttributeInterface
      */
     public function setNumberMin($numberMin)
     {
@@ -569,7 +569,7 @@ class ProductAttribute extends AbstractEntityAttribute implements
      *
      * @param mixed $numberMax
      *
-     * @return ProductAttribute
+     * @return ProductAttributeInterface
      */
     public function setNumberMax($numberMax)
     {
@@ -593,7 +593,7 @@ class ProductAttribute extends AbstractEntityAttribute implements
      *
      * @param boolean $decimalsAllowed
      *
-     * @return ProductAttribute
+     * @return ProductAttributeInterface
      */
     public function setDecimalsAllowed($decimalsAllowed)
     {
@@ -617,7 +617,7 @@ class ProductAttribute extends AbstractEntityAttribute implements
      *
      * @param boolean $negativeAllowed
      *
-     * @return ProductAttribute
+     * @return ProductAttributeInterface
      */
     public function setNegativeAllowed($negativeAllowed)
     {
@@ -641,7 +641,7 @@ class ProductAttribute extends AbstractEntityAttribute implements
      *
      * @param string $dateType
      *
-     * @return ProductAttribute
+     * @return ProductAttributeInterface
      */
     public function setDateType($dateType)
     {
@@ -665,7 +665,7 @@ class ProductAttribute extends AbstractEntityAttribute implements
      *
      * @param datetime $dateMin
      *
-     * @return ProductAttribute
+     * @return ProductAttributeInterface
      */
     public function setDateMin($dateMin)
     {
@@ -689,7 +689,7 @@ class ProductAttribute extends AbstractEntityAttribute implements
      *
      * @param datetime $dateMax
      *
-     * @return ProductAttribute
+     * @return ProductAttributeInterface
      */
     public function setDateMax($dateMax)
     {
@@ -713,7 +713,7 @@ class ProductAttribute extends AbstractEntityAttribute implements
      *
      * @param string $metricFamily
      *
-     * @return ProductAttribute
+     * @return ProductAttributeInterface
      */
     public function setMetricFamily($metricFamily)
     {
@@ -737,7 +737,7 @@ class ProductAttribute extends AbstractEntityAttribute implements
      *
      * @param string $defaultMetricUnit
      *
-     * @return ProductAttribute
+     * @return ProductAttributeInterface
      */
     public function setDefaultMetricUnit($defaultMetricUnit)
     {
@@ -761,7 +761,7 @@ class ProductAttribute extends AbstractEntityAttribute implements
      *
      * @param decimal $maxFileSize
      *
-     * @return ProductAttribute
+     * @return ProductAttributeInterface
      */
     public function setMaxFileSize($maxFileSize)
     {
@@ -785,7 +785,7 @@ class ProductAttribute extends AbstractEntityAttribute implements
      *
      * @param string $allowedExtensions
      *
-     * @return ProductAttribute
+     * @return ProductAttributeInterface
      */
     public function setAllowedExtensions($allowedExtensions)
     {
@@ -811,7 +811,7 @@ class ProductAttribute extends AbstractEntityAttribute implements
      *
      * @param int $minimumInputLength
      *
-     * @return ProductAttribute
+     * @return ProductAttributeInterface
      */
     public function setMinimumInputLength($minimumInputLength)
     {
@@ -835,7 +835,7 @@ class ProductAttribute extends AbstractEntityAttribute implements
      *
      * @param number $sortOrder
      *
-     * @return ProductAttribute
+     * @return ProductAttributeInterface
      */
     public function setSortOrder($sortOrder)
     {
@@ -849,7 +849,7 @@ class ProductAttribute extends AbstractEntityAttribute implements
      *
      * @param array $parameters
      *
-     * @return ProductAttribute
+     * @return ProductAttributeInterface
      *
      * @throws \Exception
      */

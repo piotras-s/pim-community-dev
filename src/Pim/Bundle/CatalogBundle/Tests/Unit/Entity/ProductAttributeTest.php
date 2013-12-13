@@ -3,7 +3,7 @@
 namespace Pim\Bundle\CatalogBundle\Tests\Unit\Entity;
 
 use Pim\Bundle\CatalogBundle\Entity\ProductAttributeTranslation;
-use Pim\Bundle\CatalogBundle\Entity\ProductAttribute;
+use Pim\Bundle\CatalogBundle\Model\ProductAttributeInterface;
 use Pim\Bundle\CatalogBundle\Entity\AttributeGroup;
 use Pim\Bundle\CatalogBundle\Entity\Locale;
 
@@ -14,10 +14,10 @@ use Pim\Bundle\CatalogBundle\Entity\Locale;
  * @copyright 2013 Akeneo SAS (http://www.akeneo.com)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
-class ProductAttributeTest extends \PHPUnit_Framework_TestCase
+class ProductAttributeInterfaceTest extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var ProductAttribute
+     * @var ProductAttributeInterface
      */
     protected $attribute;
 
@@ -28,7 +28,7 @@ class ProductAttributeTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->attribute = new ProductAttribute();
+        $this->attribute = new ProductAttributeInterface();
     }
 
     /**
@@ -490,10 +490,10 @@ class ProductAttributeTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Assert entity
-     * @param Pim\Bundle\CatalogBundle\Entity\ProductAttribute $entity
+     * @param Pim\Bundle\CatalogBundle\Model\ProductAttributeInterface $entity
      */
     protected function assertEntity($entity)
     {
-        $this->assertInstanceOf('Pim\Bundle\CatalogBundle\Entity\ProductAttribute', $entity);
+        $this->assertInstanceOf('Pim\Bundle\CatalogBundle\Model\ProductAttributeInterface', $entity);
     }
 }

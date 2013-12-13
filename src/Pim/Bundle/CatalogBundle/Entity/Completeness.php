@@ -234,11 +234,11 @@ class Completeness
     /**
      * Add attribute to the missing attributes collection
      *
-     * @param ProductAttribute $attribute
+     * @param ProductAttributeInterface $attribute
      *
      * @return Completeness
      */
-    public function addMissingAttribute(ProductAttribute $attribute)
+    public function addMissingAttribute(ProductAttributeInterface $attribute)
     {
         if (!$this->missingAttributes->contains($attribute)) {
             $this->missingAttributes->add($attribute);
@@ -250,11 +250,11 @@ class Completeness
     /**
      * Remove attribute from the missing attributes collection
      *
-     * @param ProductAttribute $attribute
+     * @param ProductAttributeInterface $attribute
      *
      * @return Completeness
      */
-    public function removeMissingAttribute(ProductAttribute $attribute)
+    public function removeMissingAttribute(ProductAttributeInterface $attribute)
     {
         $this->missingAttributes->removeElement($attribute);
 

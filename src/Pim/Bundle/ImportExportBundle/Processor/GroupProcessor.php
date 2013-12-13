@@ -99,7 +99,7 @@ class GroupProcessor extends AbstractEntityProcessor
      *
      * @param array $item
      *
-     * @return ProductAttribute[]
+     * @return ProductAttributeInterface[]
      */
     private function getAxis(array $item)
     {
@@ -124,13 +124,13 @@ class GroupProcessor extends AbstractEntityProcessor
      *
      * @param string $code
      *
-     * @return ProductAttribute
+     * @return ProductAttributeInterface
      */
     private function findAttribute($code)
     {
         return $this
             ->entityManager
-            ->getRepository('PimCatalogBundle:ProductAttribute')
+            ->getRepository('PimCatalogBundle:ProductAttributeInterface')
             ->findOneBy(array('code' => $code));
     }
 }

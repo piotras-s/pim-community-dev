@@ -3,7 +3,7 @@
 namespace Pim\Bundle\CatalogBundle\Tests\Unit\Manager;
 
 use Pim\Bundle\FlexibleEntityBundle\Entity\Attribute;
-use Pim\Bundle\CatalogBundle\Entity\ProductAttribute;
+use Pim\Bundle\CatalogBundle\Model\ProductAttributeInterface;
 
 use Pim\Bundle\CatalogBundle\Manager\AttributeTypeManager;
 use Symfony\Component\Validator\GlobalExecutionContext;
@@ -101,11 +101,11 @@ class AttributeTypeManagerTest extends WebTestCase
     {
         $data = array('attributeType' => 'pim_catalog_metric');
         $attribute = $this->attTypeManager->createAttributeFromFormData($data);
-        $this->assertInstanceOf('Pim\Bundle\CatalogBundle\Entity\ProductAttribute', $attribute);
+        $this->assertInstanceOf('Pim\Bundle\CatalogBundle\Model\ProductAttributeInterface', $attribute);
 
-        $attribute = $this->createProductAttribute('pim_catalog_price_collection');
+        $attribute = $this->createProductAttributeInterface('pim_catalog_price_collection');
         $newAttribute = $this->attTypeManager->createAttributeFromFormData($attribute);
-        $this->assertInstanceOf('Pim\Bundle\CatalogBundle\Entity\ProductAttribute', $newAttribute);
+        $this->assertInstanceOf('Pim\Bundle\CatalogBundle\Model\ProductAttributeInterface', $newAttribute);
         $this->assertEquals($attribute, $newAttribute);
 
         $attribute = 'ImageType';
@@ -141,9 +141,9 @@ class AttributeTypeManagerTest extends WebTestCase
      *
      * @param AttributeType|null $type Product attribute type
      *
-     * @return \Pim\Bundle\CatalogBundle\Entity\ProductAttribute
+     * @return \Pim\Bundle\CatalogBundle\Model\ProductAttributeInterface
      */
-    protected function createProductAttribute($type = null)
+    protected function createProductAttributeInterface($type = null)
     {
         return $this->productManager->createAttribute($type);
     }

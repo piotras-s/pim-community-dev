@@ -4,7 +4,7 @@ namespace Pim\Bundle\VersioningBundle\Tests\Unit\UpdateGuesser;
 
 use Pim\Bundle\VersioningBundle\UpdateGuesser\UpdateGuesserInterface;
 use Pim\Bundle\VersioningBundle\UpdateGuesser\VersionableUpdateGuesser;
-use Pim\Bundle\CatalogBundle\Entity\ProductAttribute;
+use Pim\Bundle\CatalogBundle\Model\ProductAttributeInterface;
 use Pim\Bundle\CatalogBundle\Entity\Family;
 
 /**
@@ -22,10 +22,10 @@ class VersionableUpdateGuesserTest extends AbstractUpdateGuesserTest
     public function testGuessUpdates()
     {
         $versionables = array(
-            'Pim\Bundle\CatalogBundle\Entity\ProductAttribute',
+            'Pim\Bundle\CatalogBundle\Model\ProductAttributeInterface',
             'Pim\Bundle\CatalogBundle\Entity\Family'
         );
-        $attribute = new ProductAttribute();
+        $attribute = new ProductAttributeInterface();
         $attribute->setCode('my code');
         $guesser   = new VersionableUpdateGuesser($versionables);
         $em        = $this->getEntityManagerMock();

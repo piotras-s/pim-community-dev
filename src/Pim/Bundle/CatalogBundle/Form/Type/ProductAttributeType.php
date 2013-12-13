@@ -99,7 +99,7 @@ class ProductAttributeType extends AttributeType
             array(
                 'field'             => 'label',
                 'translation_class' => 'Pim\\Bundle\\CatalogBundle\\Entity\\ProductAttributeTranslation',
-                'entity_class'      => 'Pim\\Bundle\\CatalogBundle\\Entity\\ProductAttribute',
+                'entity_class'      => 'Pim\\Bundle\\CatalogBundle\\Entity\\ProductAttributeInterface',
                 'property_path'     => 'translations'
             )
         );
@@ -227,7 +227,7 @@ class ProductAttributeType extends AttributeType
     {
         $resolver->setDefaults(
             array(
-                'data_class' => 'Pim\Bundle\CatalogBundle\Entity\ProductAttribute'
+                'data_class' => 'Pim\Bundle\CatalogBundle\Model\ProductAttributeInterface'
             )
         );
     }

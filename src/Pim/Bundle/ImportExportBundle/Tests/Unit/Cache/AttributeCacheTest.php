@@ -37,7 +37,7 @@ class AttributeCacheTest extends \PHPUnit_Framework_TestCase
         $this->doctrine = $this->getMock('Symfony\Bridge\Doctrine\RegistryInterface');
         $this->doctrine->expects($this->any())
             ->method('getRepository')
-            ->with($this->equalTo('PimCatalogBundle:ProductAttribute'))
+            ->with($this->equalTo('PimCatalogBundle:ProductAttributeInterface'))
             ->will($this->returnValue($this->repository));
         $this->attributeCache = new AttributeCache($this->doctrine);
     }
@@ -68,11 +68,11 @@ class AttributeCacheTest extends \PHPUnit_Framework_TestCase
      * @param string $code
      * @param string $attributeType
      *
-     * @return \Pim\Bundle\CatalogBundle\Entity\ProductAttribute
+     * @return \Pim\Bundle\CatalogBundle\Model\ProductAttributeInterface
      */
     public function addAttribute($code, $attributeType = 'default')
     {
-        $attribute = $this->getMock('Pim\Bundle\CatalogBundle\Entity\ProductAttribute');
+        $attribute = $this->getMock('Pim\Bundle\CatalogBundle\Model\ProductAttributeInterface');
 
         $attribute->expects($this->any())
             ->method('getCode')

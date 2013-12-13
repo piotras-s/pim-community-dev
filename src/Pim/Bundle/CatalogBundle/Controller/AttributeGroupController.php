@@ -224,7 +224,7 @@ class AttributeGroupController extends AbstractDoctrineController
     }
 
     /**
-     * Get the AvailbleProductAttributes form
+     * Get the AvailbleProductAttributeInterfaces form
      *
      * @param array                      $attributes          The product attributes
      * @param AvailableProductAttributes $availableAttributes The available attributes container
@@ -251,7 +251,7 @@ class AttributeGroupController extends AbstractDoctrineController
      * @AclAncestor("pim_catalog_attribute_group_add_attribute")
      * @return Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function addProductAttributesAction(Request $request, $id)
+    public function addProductAttributeInterfacesAction(Request $request, $id)
     {
         $group               = $this->findOr404('PimCatalogBundle:AttributeGroup', $id);
         $maxOrder            = $group->getMaxAttributeSortOrder();
@@ -285,10 +285,10 @@ class AttributeGroupController extends AbstractDoctrineController
      * @AclAncestor("pim_catalog_attribute_group_remove_attribute")
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function removeProductAttributeAction($groupId, $attributeId)
+    public function removeProductAttributeInterfaceAction($groupId, $attributeId)
     {
         $group     = $this->findOr404('PimCatalogBundle:AttributeGroup', $groupId);
-        $attribute = $this->findOr404('PimCatalogBundle:ProductAttribute', $attributeId);
+        $attribute = $this->findOr404('PimCatalogBundle:ProductAttributeInterface', $attributeId);
 
         if (false === $group->hasAttribute($attribute)) {
             throw $this->createNotFoundException(
@@ -313,7 +313,7 @@ class AttributeGroupController extends AbstractDoctrineController
      */
     protected function getGroupedAttributes()
     {
-        return $this->getRepository('PimCatalogBundle:ProductAttribute')->findAllGrouped();
+        return $this->getRepository('PimCatalogBundle:ProductAttributeInterface')->findAllGrouped();
     }
 
     /**

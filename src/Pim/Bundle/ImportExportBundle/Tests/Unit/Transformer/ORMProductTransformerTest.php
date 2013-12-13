@@ -111,7 +111,7 @@ class ORMProductTransformerTest extends ORMTransformerTestCase
 
     protected function addAttribute($code, $attributeType = 'type')
     {
-        $this->attributes[$code] = $this->getMock('Pim\Bundle\CatalogBundle\Entity\ProductAttribute');
+        $this->attributes[$code] = $this->getMock('Pim\Bundle\CatalogBundle\Model\ProductAttributeInterface');
         $this->attributes[$code]
             ->expects($this->any())
             ->method('getCode')

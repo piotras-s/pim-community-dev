@@ -4,7 +4,7 @@ namespace Pim\Bundle\ImportExportBundle\Tests\Unit\Normalizer;
 
 use Pim\Bundle\ImportExportBundle\Normalizer\AttributeNormalizer;
 use Pim\Bundle\ImportExportBundle\Normalizer\TranslationNormalizer;
-use Pim\Bundle\CatalogBundle\Entity\ProductAttribute;
+use Pim\Bundle\CatalogBundle\Model\ProductAttributeInterface;
 use Pim\Bundle\CatalogBundle\Entity\AttributeGroup;
 use Pim\Bundle\CatalogBundle\Entity\AttributeOption;
 use Pim\Bundle\CatalogBundle\Entity\AttributeOptionValue;
@@ -34,9 +34,9 @@ class AttributeNormalizerTest extends NormalizerTestCase
     public static function getSupportNormalizationData()
     {
         return array(
-            array('Pim\Bundle\CatalogBundle\Entity\ProductAttribute', 'json', true),
-            array('Pim\Bundle\CatalogBundle\Entity\ProductAttribute', 'xml', true),
-            array('Pim\Bundle\CatalogBundle\Entity\ProductAttribute', 'csv', false),
+            array('Pim\Bundle\CatalogBundle\Model\ProductAttributeInterface', 'json', true),
+            array('Pim\Bundle\CatalogBundle\Model\ProductAttributeInterface', 'xml', true),
+            array('Pim\Bundle\CatalogBundle\Model\ProductAttributeInterface', 'csv', false),
             array('stdClass', 'json', false),
             array('stdClass', 'xml', false),
             array('stdClass', 'csv', false),
@@ -153,11 +153,11 @@ class AttributeNormalizerTest extends NormalizerTestCase
     /**
      * {@inheritdoc}
      *
-     * @return ProductAttribute
+     * @return ProductAttributeInterface
      */
     protected function createEntity(array $data)
     {
-        $attribute = new ProductAttribute();
+        $attribute = new ProductAttributeInterface();
         $attribute->setAttributeType($data['type']);
 
         $this->addLabels($attribute, $data);
@@ -204,8 +204,8 @@ class AttributeNormalizerTest extends NormalizerTestCase
     }
 
     /**
-     * @param ProductAttribute $attribute
-     * @param array            $data
+     * @param ProductAttributeInterface $attribute
+     * @param array                     $data
      */
     protected function addLabels($attribute, $data)
     {
@@ -216,8 +216,8 @@ class AttributeNormalizerTest extends NormalizerTestCase
     }
 
     /**
-     * @param ProductAttribute $attribute
-     * @param array            $data
+     * @param ProductAttributeInterface $attribute
+     * @param array                     $data
      */
     protected function addAvailableLocales($attribute, $data)
     {
@@ -231,10 +231,10 @@ class AttributeNormalizerTest extends NormalizerTestCase
     /**
      * Create attribute options
      *
-     * @param ProductAttribute $attribute
-     * @param array            $data
+     * @param ProductAttributeInterface $attribute
+     * @param array                     $data
      */
-    protected function addOptions(ProductAttribute $attribute, $data)
+    protected function addOptions(ProductAttributeInterface $attribute, $data)
     {
         foreach ($data['options'] as $code => $values) {
             $attributeOption = new AttributeOption();
@@ -252,10 +252,10 @@ class AttributeNormalizerTest extends NormalizerTestCase
     /**
      * Add attribute default options
      *
-     * @param ProductAttribute $attribute
-     * @param array            $data
+     * @param ProductAttributeInterface $attribute
+     * @param array                     $data
      */
-    protected function addDefaultOptions(ProductAttribute $attribute, $data)
+    protected function addDefaultOptions(ProductAttributeInterface $attribute, $data)
     {
         $defaultOptions = array_keys($data['default_options']);
         foreach ($defaultOptions as $code) {

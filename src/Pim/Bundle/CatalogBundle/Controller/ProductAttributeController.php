@@ -23,7 +23,7 @@ use Pim\Bundle\GridBundle\Helper\DatagridHelperInterface;
 use Pim\Bundle\CatalogBundle\Form\Handler\ProductAttributeHandler;
 use Pim\Bundle\CatalogBundle\Manager\LocaleManager;
 use Pim\Bundle\CatalogBundle\Manager\ProductManager;
-use Pim\Bundle\CatalogBundle\Entity\ProductAttribute;
+use Pim\Bundle\CatalogBundle\Model\ProductAttributeInterface;
 use Pim\Bundle\CatalogBundle\Entity\AttributeOption;
 use Pim\Bundle\CatalogBundle\Entity\AttributeOptionValue;
 use Pim\Bundle\CatalogBundle\Exception\DeleteException;
@@ -150,7 +150,7 @@ class ProductAttributeController extends AbstractDoctrineController
         if ('json' == $request->getRequestFormat()) {
             $view = 'OroGridBundle:Datagrid:list.json.php';
         } else {
-            $view = 'PimCatalogBundle:ProductAttribute:index.html.twig';
+            $view = 'PimCatalogBundle:ProductAttributeInterface:index.html.twig';
         }
 
         return $this->render($view, array('datagrid' => $datagrid->createView()));
@@ -159,7 +159,7 @@ class ProductAttributeController extends AbstractDoctrineController
     /**
      * Create attribute
      *
-     * @Template("PimCatalogBundle:ProductAttribute:form.html.twig")
+     * @Template("PimCatalogBundle:ProductAttributeInterface:form.html.twig")
      * @AclAncestor("pim_catalog_attribute_create")
      * @return array
      */
@@ -184,14 +184,14 @@ class ProductAttributeController extends AbstractDoctrineController
     /**
      * Edit attribute form
      *
-     * @param Request          $request
-     * @param ProductAttribute $attribute
+     * @param Request                   $request
+     * @param ProductAttributeInterface $attribute
      *
-     * @Template("PimCatalogBundle:ProductAttribute:form.html.twig")
+     * @Template("PimCatalogBundle:ProductAttributeInterface:form.html.twig")
      * @AclAncestor("pim_catalog_attribute_edit")
      * @return array
      */
-    public function editAction(Request $request, ProductAttribute $attribute)
+    public function editAction(Request $request, ProductAttributeInterface $attribute)
     {
         if ($this->attributeHandler->process($attribute)) {
             $this->addFlash('success', 'flash.attribute.updated');
@@ -213,12 +213,12 @@ class ProductAttributeController extends AbstractDoctrineController
     /**
      * History of a attribute
      *
-     * @param Request          $request
-     * @param ProductAttribute $attribute
+     * @param Request                   $request
+     * @param ProductAttributeInterface $attribute
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|template
      */
-    public function historyAction(Request $request, ProductAttribute $attribute)
+    public function historyAction(Request $request, ProductAttributeInterface $attribute)
     {
         $historyGridView = $this->getHistoryGrid($attribute)->createView();
 
@@ -232,7 +232,7 @@ class ProductAttributeController extends AbstractDoctrineController
      *
      * @param Request $request
      *
-     * @Template("PimCatalogBundle:ProductAttribute:_form_parameters.html.twig")
+     * @Template("PimCatalogBundle:ProductAttributeInterface:_form_parameters.html.twig")
      * @AclAncestor("pim_catalog_attribute_edit")
      * @return array
      */
@@ -252,7 +252,7 @@ class ProductAttributeController extends AbstractDoctrineController
 
         $data = array(
             'parameters' => $this->renderView(
-                'PimCatalogBundle:ProductAttribute:_form_parameters.html.twig',
+                'PimCatalogBundle:ProductAttributeInterface:_form_parameters.html.twig',
                 array(
                     'form'            => $form,
                     'locales'         => $locales,
@@ -260,7 +260,7 @@ class ProductAttributeController extends AbstractDoctrineController
                 )
             ),
             'values' => $this->renderView(
-                'PimCatalogBundle:ProductAttribute:_form_values.html.twig',
+                'PimCatalogBundle:ProductAttributeInterface:_form_values.html.twig',
                 array(
                     'form'            => $form,
                     'locales'         => $locales,
@@ -273,7 +273,7 @@ class ProductAttributeController extends AbstractDoctrineController
     }
 
     /**
-     * Edit ProductAttribute sort order
+     * Edit ProductAttributeInterface sort order
      *
      * @param Request $request
      *
@@ -290,7 +290,7 @@ class ProductAttributeController extends AbstractDoctrineController
 
         if (!empty($data)) {
             foreach ($data as $id => $sort) {
-                $attribute = $this->getRepository('PimCatalogBundle:ProductAttribute')->find((int) $id);
+                $attribute = $this->getRepository('PimCatalogBundle:ProductAttributeInterface')->find((int) $id);
                 if ($attribute) {
                     $attribute->setSortOrder((int) $sort);
                     $this->getManager()->persist($attribute);
@@ -307,15 +307,15 @@ class ProductAttributeController extends AbstractDoctrineController
     /**
      * Create a new option for a simple/multi-select attribute
      *
-     * @param Request          $request
-     * @param ProductAttribute $attribute
-     * @param string           $dataLocale
+     * @param Request                   $request
+     * @param ProductAttributeInterface $attribute
+     * @param string                    $dataLocale
      *
-     * @Template("PimCatalogBundle:ProductAttribute:form_options.html.twig")
+     * @Template("PimCatalogBundle:ProductAttributeInterface:form_options.html.twig")
      * @AclAncestor("pim_catalog_attribute_edit")
      * @return Response
      */
-    public function createOptionAction(Request $request, ProductAttribute $attribute, $dataLocale)
+    public function createOptionAction(Request $request, ProductAttributeInterface $attribute, $dataLocale)
     {
         if (!$request->isXmlHttpRequest() || !in_array($attribute->getAttributeType(), $this->choiceAttributeTypes)) {
             return $this->redirectToRoute('pim_catalog_productattribute_edit', array('id'=> $attribute->getId()));
@@ -359,14 +359,14 @@ class ProductAttributeController extends AbstractDoctrineController
     /**
      * Remove attribute
      *
-     * @param Request          $request
-     * @param ProductAttribute $entity
+     * @param Request                   $request
+     * @param ProductAttributeInterface $entity
      *
      * @AclAncestor("pim_catalog_attribute_remove")
      *
      * @return \Symfony\Component\HttpFoundation\RedirectResponse|Response
      */
-    public function removeAction(Request $request, ProductAttribute $entity)
+    public function removeAction(Request $request, ProductAttributeInterface $entity)
     {
         $this->validateRemoval($entity);
 
@@ -383,13 +383,13 @@ class ProductAttributeController extends AbstractDoctrineController
     /**
      * Check if the attribute is removable, otherwise throw an exception or redirect
      *
-     * @param ProductAttribute $attribute
+     * @param ProductAttributeInterface $attribute
      *
      * @throws DeleteException For ajax requests if the attribute is not removable
      *
      * @return RedirectResponse|null
      */
-    protected function validateRemoval(ProductAttribute $attribute)
+    protected function validateRemoval(ProductAttributeInterface $attribute)
     {
         if ($attribute->getAttributeType() === 'pim_catalog_identifier') {
             $errorMessage = 'flash.attribute.identifier not removable';
@@ -414,11 +414,11 @@ class ProductAttributeController extends AbstractDoctrineController
     }
 
     /**
-     * @param ProductAttribute $attribute
+     * @param ProductAttributeInterface $attribute
      *
      * @return Datagrid
      */
-    protected function getHistoryGrid(ProductAttribute $attribute)
+    protected function getHistoryGrid(ProductAttributeInterface $attribute)
     {
         $historyGrid = $this->datagridHelper->getDataAuditDatagrid(
             $attribute,

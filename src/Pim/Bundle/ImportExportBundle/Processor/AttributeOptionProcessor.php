@@ -2,7 +2,7 @@
 
 namespace Pim\Bundle\ImportExportBundle\Processor;
 
-use Pim\Bundle\CatalogBundle\Entity\ProductAttribute;
+use Pim\Bundle\CatalogBundle\Model\ProductAttributeInterface;
 use Pim\Bundle\CatalogBundle\Entity\AttributeOption;
 use Pim\Bundle\CatalogBundle\Entity\AttributeOptionValue;
 
@@ -87,25 +87,25 @@ class AttributeOptionProcessor extends AbstractEntityProcessor
      *
      * @param string $code
      *
-     * @return ProductAttribute|null
+     * @return ProductAttributeInterface|null
      */
     protected function findAttribute($code)
     {
         return $this
             ->entityManager
-            ->getRepository('PimCatalogBundle:ProductAttribute')
+            ->getRepository('PimCatalogBundle:ProductAttributeInterface')
             ->findOneBy(array('code' => $code));
     }
 
     /**
      * Find option by code
      *
-     * @param ProductAttribute $attribute
-     * @param string           $code
+     * @param ProductAttributeInterface $attribute
+     * @param string                    $code
      *
      * @return AttributeOption|null
      */
-    protected function findOption(ProductAttribute $attribute, $code)
+    protected function findOption(ProductAttributeInterface $attribute, $code)
     {
         return $this
             ->entityManager

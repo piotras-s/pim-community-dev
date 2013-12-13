@@ -37,9 +37,9 @@ class CreateAttributeRequirementSubscriberTest extends \PHPUnit_Framework_TestCa
     {
         $channel     = $this->getChannelMock();
 
-        $sku         = $this->getProductAttributeMock('pim_catalog_identifier');
-        $name        = $this->getProductAttributeMock('pim_catalog_text');
-        $description = $this->getProductAttributeMock('pim_catalog_text');
+        $sku         = $this->getProductAttributeInterfaceMock('pim_catalog_identifier');
+        $name        = $this->getProductAttributeInterfaceMock('pim_catalog_text');
+        $description = $this->getProductAttributeInterfaceMock('pim_catalog_text');
 
         $family1     = $this->getFamilyMock(array($sku, $name, $description));
         $family2     = $this->getFamilyMock(array($sku, $name));
@@ -214,11 +214,11 @@ class CreateAttributeRequirementSubscriberTest extends \PHPUnit_Framework_TestCa
     /**
      * @param string $attributeType
      *
-     * @return \Pim\Bundle\CatalogBundle\Entity\ProductAttribute
+     * @return \Pim\Bundle\CatalogBundle\Model\ProductAttributeInterface
      */
-    protected function getProductAttributeMock($attributeType)
+    protected function getProductAttributeInterfaceMock($attributeType)
     {
-        $attribute = $this->getMock('Pim\Bundle\CatalogBundle\Entity\ProductAttribute');
+        $attribute = $this->getMock('Pim\Bundle\CatalogBundle\Model\ProductAttributeInterface');
 
         $attribute->expects($this->any())
             ->method('getAttributeType')

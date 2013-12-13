@@ -80,7 +80,7 @@ class InjectORMReferencesSubscriber implements EventSubscriber
 
         $attributeReflProp->setValue(
             $value,
-            $this->entityManager->getReference('PimCatalogBundle:ProductAttribute', $value->getAttributeId())
+            $this->entityManager->getReference('PimCatalogBundle:ProductAttributeInterface', $value->getAttributeId())
         );
     }
 

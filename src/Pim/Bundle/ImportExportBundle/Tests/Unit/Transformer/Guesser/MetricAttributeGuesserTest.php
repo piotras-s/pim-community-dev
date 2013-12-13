@@ -56,7 +56,7 @@ class MetricAttributeGuesserTest extends GuesserTestCase
 
     protected function setAttributeMock()
     {
-        $this->attribute = $this->getMock('Pim\Bundle\CatalogBundle\Entity\ProductAttribute');
+        $this->attribute = $this->getMock('Pim\Bundle\CatalogBundle\Model\ProductAttributeInterface');
         $this->attribute->expects($this->any())
             ->method('getBackendType')
             ->will($this->returnValue('backend_type'));

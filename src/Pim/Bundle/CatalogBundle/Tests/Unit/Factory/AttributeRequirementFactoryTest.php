@@ -26,7 +26,7 @@ class AttributeRequirementFactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testCreateAttributeRequirement()
     {
-        $productAttribute = $this->getProductAttributeMock();
+        $productAttribute = $this->getProductAttributeInterfaceMock();
         $channel          = $this->getChannelMock();
         $requirement      = $this->factory->createAttributeRequirement($productAttribute, $channel, true);
 
@@ -41,7 +41,7 @@ class AttributeRequirementFactoryTest extends \PHPUnit_Framework_TestCase
      */
     public function testCreateUnrequiredAttributeRequirement()
     {
-        $productAttribute = $this->getProductAttributeMock();
+        $productAttribute = $this->getProductAttributeInterfaceMock();
         $channel          = $this->getChannelMock();
         $requirement      = $this->factory->createAttributeRequirement($productAttribute, $channel, false);
 
@@ -52,11 +52,11 @@ class AttributeRequirementFactoryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return \Pim\Bundle\CatalogBundle\Entity\ProductAttribute
+     * @return \Pim\Bundle\CatalogBundle\Model\ProductAttributeInterface
      */
-    protected function getProductAttributeMock()
+    protected function getProductAttributeInterfaceMock()
     {
-        return $this->getMock('Pim\Bundle\CatalogBundle\Entity\ProductAttribute');
+        return $this->getMock('Pim\Bundle\CatalogBundle\Model\ProductAttributeInterface');
     }
 
     /**

@@ -142,22 +142,22 @@ pim_catalog_attribute_group_remove_attribute:
     type: action
     label: Remove attribute from a group
 
-# ProductAttribute
+# ProductAttributeInterface
 pim_catalog_attribute_index:
     type: entity
-    class: PimCatalogBundle:ProductAttribute
+    class: PimCatalogBundle:ProductAttributeInterface
     permission: VIEW
 pim_catalog_attribute_create:
     type: entity
-    class: PimCatalogBundle:ProductAttribute
+    class: PimCatalogBundle:ProductAttributeInterface
     permission: CREATE
 pim_catalog_attribute_edit:
     type: entity
-    class: PimCatalogBundle:ProductAttribute
+    class: PimCatalogBundle:ProductAttributeInterface
     permission: EDIT
 pim_catalog_attribute_remove:
     type: entity
-    class: PimCatalogBundle:ProductAttribute
+    class: PimCatalogBundle:ProductAttributeInterface
     permission: DELETE
 
 pim_catalog_attribute_sort:

@@ -98,7 +98,7 @@ class UniqueValueValidatorTest extends \PHPUnit_Framework_TestCase
     /**
      * Test related method
      */
-    public function testNonExistingProductAttribute()
+    public function testNonExistingProductAttributeInterface()
     {
         $product = $this->getMock('Pim\Bundle\CatalogBundle\Model\Product');
         $this
@@ -166,7 +166,7 @@ class UniqueValueValidatorTest extends \PHPUnit_Framework_TestCase
     {
         $product   = $this->getProductMock();
         $value     = $this->getProductValueMock();
-        $attribute = $this->getProductAttributeMock();
+        $attribute = $this->getProductAttributeInterfaceMock();
 
         $this
             ->context
@@ -223,7 +223,7 @@ class UniqueValueValidatorTest extends \PHPUnit_Framework_TestCase
     {
         $product   = $this->getProductMock();
         $value     = $this->getProductValueMock();
-        $attribute = $this->getProductAttributeMock();
+        $attribute = $this->getProductAttributeInterfaceMock();
 
         $this
             ->context
@@ -280,7 +280,7 @@ class UniqueValueValidatorTest extends \PHPUnit_Framework_TestCase
     {
         $product   = $this->getProductMock();
         $value     = $this->getProductValueMock();
-        $attribute = $this->getProductAttributeMock();
+        $attribute = $this->getProductAttributeInterfaceMock();
 
         $this
             ->context
@@ -400,10 +400,10 @@ class UniqueValueValidatorTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * @return \Pim\Bundle\CatalogBundle\Entity\ProductAttribute
+     * @return \Pim\Bundle\CatalogBundle\Model\ProductAttributeInterface
      */
-    public function getProductAttributeMock()
+    public function getProductAttributeInterfaceMock()
     {
-        return $this->getMock('Pim\Bundle\CatalogBundle\Entity\ProductAttribute');
+        return $this->getMock('Pim\Bundle\CatalogBundle\Model\ProductAttributeInterface');
     }
 }

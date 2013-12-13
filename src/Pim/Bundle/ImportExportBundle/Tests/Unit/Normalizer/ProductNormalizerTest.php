@@ -201,9 +201,9 @@ class ProductNormalizerTest extends \PHPUnit_Framework_TestCase
 
     /**
      * Get a product value mock
-     * @param ProductAttribute $attribute
-     * @param mixed            $data
-     * @param string           $locale
+     * @param ProductAttributeInterface $attribute
+     * @param mixed                     $data
+     * @param string                    $locale
      *
      * @return ProductValue
      */
@@ -235,7 +235,7 @@ class ProductNormalizerTest extends \PHPUnit_Framework_TestCase
      */
     private function getAttributeMock($code, $translatable = false)
     {
-        $attribute = $this->getMock('Pim\Bundle\CatalogBundle\Entity\ProductAttribute');
+        $attribute = $this->getMock('Pim\Bundle\CatalogBundle\Model\ProductAttributeInterface');
 
         $attribute->expects($this->any())
             ->method('getCode')

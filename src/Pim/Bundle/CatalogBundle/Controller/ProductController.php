@@ -418,7 +418,7 @@ class ProductController extends AbstractDoctrineController
      * @AclAncestor("pim_catalog_product_add_attribute")
      * @return Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function addProductAttributesAction(Request $request, $id)
+    public function addProductAttributeInterfacesAction(Request $request, $id)
     {
         $product             = $this->findProductOr404($id);
         $availableAttributes = new AvailableProductAttributes();
@@ -471,10 +471,10 @@ class ProductController extends AbstractDoctrineController
      *
      * @throws NotFoundHttpException
      */
-    public function removeProductAttributeAction($productId, $attributeId)
+    public function removeProductAttributeInterfaceAction($productId, $attributeId)
     {
         $product   = $this->findOr404('Pim\Bundle\CatalogBundle\Model\Product', $productId);
-        $attribute = $this->findOr404('PimCatalogBundle:ProductAttribute', $attributeId);
+        $attribute = $this->findOr404('PimCatalogBundle:ProductAttributeInterface', $attributeId);
 
         if ($product->isAttributeRemovable($attribute)) {
             $this->productManager->removeAttributeFromProduct($product, $attribute);
@@ -630,7 +630,7 @@ class ProductController extends AbstractDoctrineController
     }
 
     /**
-     * Get the AvailbleProductAttributes form
+     * Get the AvailbleProductAttributeInterfaces form
      *
      * @param array                      $attributes          The product attributes
      * @param AvailableProductAttributes $availableAttributes The available attributes container
