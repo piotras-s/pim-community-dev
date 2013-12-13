@@ -4,7 +4,7 @@
 
 {% block content %}
 
-    {% include 'PimCatalogBundle:ProductAttributeInterface:_available-attributes-form.html.twig' with {
+    {% include 'PimCatalogBundle:ProductAttribute:_available-attributes-form.html.twig' with {
         'form': attributesForm,
         'action': path('pim_catalog_family_addproductattributes', {'id': form.vars.value.id})
     } %}

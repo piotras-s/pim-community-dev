@@ -150,7 +150,7 @@ class ProductAttributeController extends AbstractDoctrineController
         if ('json' == $request->getRequestFormat()) {
             $view = 'OroGridBundle:Datagrid:list.json.php';
         } else {
-            $view = 'PimCatalogBundle:ProductAttributeInterface:index.html.twig';
+            $view = 'PimCatalogBundle:ProductAttribute:index.html.twig';
         }
 
         return $this->render($view, array('datagrid' => $datagrid->createView()));
@@ -159,7 +159,7 @@ class ProductAttributeController extends AbstractDoctrineController
     /**
      * Create attribute
      *
-     * @Template("PimCatalogBundle:ProductAttributeInterface:form.html.twig")
+     * @Template("PimCatalogBundle:ProductAttribute:form.html.twig")
      * @AclAncestor("pim_catalog_attribute_create")
      * @return array
      */
@@ -187,7 +187,7 @@ class ProductAttributeController extends AbstractDoctrineController
      * @param Request                   $request
      * @param ProductAttributeInterface $attribute
      *
-     * @Template("PimCatalogBundle:ProductAttributeInterface:form.html.twig")
+     * @Template("PimCatalogBundle:ProductAttribute:form.html.twig")
      * @AclAncestor("pim_catalog_attribute_edit")
      * @return array
      */
@@ -232,7 +232,7 @@ class ProductAttributeController extends AbstractDoctrineController
      *
      * @param Request $request
      *
-     * @Template("PimCatalogBundle:ProductAttributeInterface:_form_parameters.html.twig")
+     * @Template("PimCatalogBundle:ProductAttribute:_form_parameters.html.twig")
      * @AclAncestor("pim_catalog_attribute_edit")
      * @return array
      */
@@ -252,7 +252,7 @@ class ProductAttributeController extends AbstractDoctrineController
 
         $data = array(
             'parameters' => $this->renderView(
-                'PimCatalogBundle:ProductAttributeInterface:_form_parameters.html.twig',
+                'PimCatalogBundle:ProductAttribute:_form_parameters.html.twig',
                 array(
                     'form'            => $form,
                     'locales'         => $locales,
@@ -260,7 +260,7 @@ class ProductAttributeController extends AbstractDoctrineController
                 )
             ),
             'values' => $this->renderView(
-                'PimCatalogBundle:ProductAttributeInterface:_form_values.html.twig',
+                'PimCatalogBundle:ProductAttribute:_form_values.html.twig',
                 array(
                     'form'            => $form,
                     'locales'         => $locales,
@@ -311,7 +311,7 @@ class ProductAttributeController extends AbstractDoctrineController
      * @param ProductAttributeInterface $attribute
      * @param string                    $dataLocale
      *
-     * @Template("PimCatalogBundle:ProductAttributeInterface:form_options.html.twig")
+     * @Template("PimCatalogBundle:ProductAttribute:form_options.html.twig")
      * @AclAncestor("pim_catalog_attribute_edit")
      * @return Response
      */

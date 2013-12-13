@@ -151,7 +151,7 @@ class AttributeDatagridManager extends DatagridManager
                 'field_options' => array('choices' => $this->getAttributeTypeFieldOptions(), 'multiple' => true),
             )
         );
-        $templateProperty = new TwigTemplateProperty($field, 'PimCatalogBundle:ProductAttributeInterface:_field-type.html.twig');
+        $templateProperty = new TwigTemplateProperty($field, 'PimCatalogBundle:ProductAttribute:_field-type.html.twig');
         $field->setProperty($templateProperty);
 
         return $field;

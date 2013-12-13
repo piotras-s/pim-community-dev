@@ -2,7 +2,7 @@
 
 namespace Pim\Bundle\CatalogBundle\Tests\Unit\Form\Type;
 
-use Pim\Bundle\CatalogBundle\Form\Type\ProductAttributeInterfaceType;
+use Pim\Bundle\CatalogBundle\Form\Type\ProductAttributeType;
 
 /**
  * Test related class
@@ -11,10 +11,10 @@ use Pim\Bundle\CatalogBundle\Form\Type\ProductAttributeInterfaceType;
  * @copyright 2013 Akeneo SAS (http://www.akeneo.com)
  * @license   http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
  */
-class ProductAttributeInterfaceTypeTest extends AbstractFormTypeTest
+class ProductAttributeTypeTest extends AbstractFormTypeTest
 {
     /**
-     * @var \Pim\Bundle\CatalogBundle\Form\Type\ProductAttributeInterfaceType
+     * @var \Pim\Bundle\CatalogBundle\Form\Type\ProductAttributeType
      */
     protected $type;
 
@@ -32,7 +32,7 @@ class ProductAttributeInterfaceTypeTest extends AbstractFormTypeTest
 
         // Create a mock for the form and exclude the availableLocales and getAttributeTypeChoices methods
         $this->type = $this->getMock(
-            'Pim\Bundle\CatalogBundle\Form\Type\ProductAttributeInterfaceType',
+            'Pim\Bundle\CatalogBundle\Form\Type\ProductAttributeType',
             array('addFieldAvailableLocales', 'getAttributeTypeChoices', 'addSubscriber')
         );
         $this->form = $this->factory->create($this->type);
