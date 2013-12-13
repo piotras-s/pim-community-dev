@@ -23,7 +23,7 @@ pim_catalog_product_addproductattributes:
 
 pim_catalog_product_removeproductattribute:
     path: /{productId}/attribute/{attributeId}/remove
-    defaults: { _controller: pim_catalog.controller.product:removeProductAttributeInterfaceAction }
+    defaults: { _controller: pim_catalog.controller.product:removeProductAttributeAction }
     requirements:
         productId: "[0-9a-f]+"
         attributeId: \d+

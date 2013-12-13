@@ -224,7 +224,7 @@ class AttributeGroupController extends AbstractDoctrineController
     }
 
     /**
-     * Get the AvailbleProductAttributeInterfaces form
+     * Get the AvailableProductAttributes form
      *
      * @param array                      $attributes          The product attributes
      * @param AvailableProductAttributes $availableAttributes The available attributes container
@@ -285,7 +285,7 @@ class AttributeGroupController extends AbstractDoctrineController
      * @AclAncestor("pim_catalog_attribute_group_remove_attribute")
      * @return \Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function removeProductAttributeInterfaceAction($groupId, $attributeId)
+    public function removeProductAttributeAction($groupId, $attributeId)
     {
         $group     = $this->findOr404('PimCatalogBundle:AttributeGroup', $groupId);
         $attribute = $this->findOr404('PimCatalogBundle:ProductAttributeInterface', $attributeId);

@@ -33,7 +33,7 @@ pim_catalog_attributegroup_addproductattributes:
 
 pim_catalog_attributegroup_removeproductattribute:
     path: /{groupId}/attribute/{attributeId}/remove
-    defaults: { _controller: pim_catalog.controller.attribute_group:removeProductAttributeInterfaceAction }
+    defaults: { _controller: pim_catalog.controller.attribute_group:removeProductAttributeAction }
     requirements:
         groupId: \d+
         attributeId: \d+

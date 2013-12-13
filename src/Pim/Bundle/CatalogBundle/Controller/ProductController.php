@@ -471,7 +471,7 @@ class ProductController extends AbstractDoctrineController
      *
      * @throws NotFoundHttpException
      */
-    public function removeProductAttributeInterfaceAction($productId, $attributeId)
+    public function removeProductAttributeAction($productId, $attributeId)
     {
         $product   = $this->findOr404('Pim\Bundle\CatalogBundle\Model\Product', $productId);
         $attribute = $this->findOr404('PimCatalogBundle:ProductAttributeInterface', $attributeId);

@@ -281,7 +281,7 @@ class FamilyController extends AbstractDoctrineController
      *
      * @throws DeleteException
      */
-    public function removeProductAttributeInterfaceAction($familyId, $attributeId)
+    public function removeProductAttributeAction($familyId, $attributeId)
     {
         $family    = $this->findOr404('PimCatalogBundle:Family', $familyId);
         $attribute = $this->findOr404('PimCatalogBundle:ProductAttributeInterface', $attributeId);
