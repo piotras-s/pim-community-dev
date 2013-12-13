@@ -11,7 +11,6 @@ parameters:
 services:
     pim_import_export.transformer.product:
         class: '%pim_import_export.transformer.product.class%'
-        public: false
         arguments:
             - '@pim_catalog.manager.product'
             - '@pim_import_export.product_validator'
